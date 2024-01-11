@@ -463,9 +463,229 @@ comp_table <- matrix(c(lim_inf, lim_inf_boot, lim_sup, lim_sup_boot),
 colnames(comp_table) <- c("Fórmula", "Bootstrap")
 rownames(comp_table) <- c("Limite Inferior", "Limite Sperior")
 
+
 knitr::kable(comp_table,
              align = "crr")
 
 ```
 
+:::
+
+## Todas as espécies
+::: {.panel-tabset}
+
+### Ánalise Conjunta
+
+```{r Todas, warning=FALSE}
+#Análise de todas juntas
+
+#Por fim a espécie 	Chinstrap
+
+species_separadas_chinstrap <- penguins_db %>%
+  filter(species == "Chinstrap")
+
+n_repeticoes <- 10000 #número de repetições de amostras
+repeticoes_media_chinstrap <- as.numeric(n_repeticoes) #vetor que armazena as repetições de amostras
+for (i in 1:n_repeticoes) {
+  amostra <- sample(species_separadas_chinstrap$flipper_length_mm, size = n, replace = TRUE)
+  repeticoes_media_chinstrap[i] <- mean(amostra, na.rm = TRUE)
+}
+
+lim_inf_boot_chinstrap  <- qnorm(p = 0.025, mean = mean(repeticoes_media_chinstrap), sd = sd(repeticoes_media_chinstrap, na.rm = TRUE)) #Limite Inferior
+lim_sup_boot_chinstrap  <- qnorm(p = 0.025, mean = mean(repeticoes_media_chinstrap), sd = sd(repeticoes_media_chinstrap, na.rm = TRUE), lower.tail = FALSE) #Limite Superior
+
+#Para espécie Gentoo:
+
+# Já foi feito esse banco
+# species_separadas_gentoo <- penguins_db %>%
+#   filter(species == "Gentoo")
+
+#número de repetições de amostras
+n_repeticoes <- 10000
+
+#vetor que armazena as repetições de amostras
+repeticoes_media_gentoo <- as.numeric(n_repeticoes)
+
+for (i in 1:n_repeticoes) {
+  amostra <- sample(species_separadas_gentoo$flipper_length_mm, 
+                    size = n,
+                    replace = TRUE)
+  repeticoes_media_gentoo[i] <- mean(amostra, na.rm = TRUE)
+}
+
+# Limite Inferior
+lim_inf_boot_gentoo <- qnorm(p = 0.025,
+                             mean = mean(repeticoes_media_gentoo),
+                             sd = sd(repeticoes_media_gentoo, na.rm = TRUE))
+
+# Limite Superior
+lim_sup_boot_gentoo <- qnorm(p = 0.025,
+                             mean = mean(repeticoes_media_gentoo),
+                             sd = sd(repeticoes_media_gentoo, na.rm = TRUE), 
+                             lower.tail = FALSE)
+
+
+#vetor que armazena as repetições de amostras
+repeticoes_media_adelie <- as.numeric(n_repeticoes)
+
+for (i in 1:n_repeticoes) {
+  amostra <- sample(species_separadas_adelie$flipper_length_mm, 
+                    size = n,
+                    replace = TRUE)
+  repeticoes_media_adelie[i] <- mean(amostra, na.rm = TRUE)
+}
+
+# Limite Inferior
+lim_inf_boot_adelie <- qnorm(p = 0.025,
+                             mean = mean(repeticoes_media_adelie),
+                             sd = sd(repeticoes_media_adelie, na.rm = TRUE))
+
+# Limite Superior
+lim_sup_boot_adelie <- qnorm(p = 0.025,
+                             mean = mean(repeticoes_media_adelie),
+                             sd = sd(repeticoes_media_adelie, na.rm = TRUE), 
+                             lower.tail = FALSE)
+
+
+
+
+########## GRÁFICO TODAS ESPÉCIES ##############
+g11  <- ggplot(data = data, aes(x = x)) +
+  geom_histogram(aes(y = after_stat(density)),
+                fill = "#FC9E21",
+                binwidth = 0.1,
+                color = "black") +
+  stat_function(fun = dnorm,
+                args = list(mean = mean(data$x, na.rm = TRUE), sd = sd(data$x, na.rm = TRUE)),
+                color = "#100818",
+                size = 1) +
+  theme_minimal() +
+  labs(title = "Histograma das médias",
+      subtitle = "Para Espécie Adelie",
+       x = "Comprimento da Nadadeira (mm)",
+       y = "Densidade",
+       fill = "Distribuição")
+
+g22 <- ggplot(data = data, aes(x = x)) +
+  stat_function(fun = dnorm,
+                args = list(mean = mean(data$x, na.rm = TRUE),
+                            sd = sd(data$x, na.rm = TRUE)),
+                color = "#100818", size = 1) +
+  stat_function(fun = dnorm,
+                args = list(mean = mean(data$x, na.rm = TRUE),
+                            sd = sd(data$x, na.rm = TRUE)),
+                geom = "area", fill = "blue",
+                alpha = 0.2,
+                xlim = c(188, lim_inf)) +
+  stat_function(fun = dnorm,
+                args = list(mean = mean(data$x, na.rm = TRUE),
+                            sd = sd(data$x, na.rm = TRUE)),
+                geom = "area", fill = "blue",
+                alpha = 0.2,
+                xlim = c(lim_sup, 192)) +
+  theme_minimal() +
+  labs(title = "Curva Normal Considerando IC",
+       subtitle = "Para Espécie Adélie",
+       x = "Comprimento da Nadadeira (mm)",
+       y = "Densidade",
+       fill = "Distribuição")
+
+
+g33 <- ggplot(data = data.frame(x = repeticoes_media_gentoo), aes(x = x)) +
+  geom_histogram(aes(y = ..density..) ,
+                binwidth = 0.1,
+                fill = "#3E8F92",
+                color = "black") +
+  stat_function(fun = dnorm,
+                args = list(mean = mean(repeticoes_media_gentoo, na.rm = TRUE), sd = sd(repeticoes_media_gentoo, na.rm = TRUE)),
+                color = "black",
+                size = 1
+                ) +
+  theme_minimal() +
+  labs(title = "",
+      subtitle = "Para espécie Gentoo",
+      x = "Comprimento da Nadadeira (mm)",
+      y = "Densidade")
+
+g44 <- ggplot(data = data.frame(x = repeticoes_media_gentoo), aes(x = x)) +
+  stat_function(fun = dnorm,
+                args = list(mean = mean(repeticoes_media_gentoo, na.rm = TRUE), sd = sd(repeticoes_media_gentoo, na.rm = TRUE)),
+                color = "black",
+                size = 1) +
+  stat_function(fun = dnorm,
+                args = list(mean = mean(repeticoes_media_gentoo, na.rm = TRUE), sd = sd(repeticoes_media_gentoo, na.rm = TRUE)),
+                geom = "area",
+                xlim = c(215, lim_inf_boot_gentoo),
+                fill = "#d19b2f",
+                alpha = 0.7) +
+  stat_function(fun = dnorm,
+                args = list(mean = mean(repeticoes_media_gentoo, na.rm = TRUE), sd = sd(repeticoes_media_gentoo, na.rm = TRUE)),
+                geom = "area",
+                xlim = c(lim_sup_boot_gentoo, 220),
+                fill = "#d19b2f",
+                alpha = 0.7) +
+  theme_minimal() +
+  labs(title = "",
+      subtitle = "Para espécie Gentoo",
+      x = "Comprimento da Nadadeira (mm)",
+      y = "Densidade")
+
+
+g55 <- ggplot(data = data.frame(x = repeticoes_media_chinstrap), aes(x = x)) +
+  geom_histogram(aes(y = ..density..) ,
+                binwidth = 0.1,
+                fill = "#B03060",
+                color = "black") +
+  stat_function(fun = dnorm,
+                args = list(mean = mean(repeticoes_media_chinstrap, na.rm = TRUE), sd = sd(repeticoes_media_chinstrap, na.rm = TRUE)),
+                color = "black",
+                size = 1
+                ) +
+  theme_minimal() +
+  labs(title = "",
+      subtitle = "Para espécie Chinstrap",
+      x = "Comprimento da Nadadeira (mm)",
+      y = "Densidade")
+
+g66 <- ggplot(data = data.frame(x = repeticoes_media_chinstrap), aes(x = x)) +
+  stat_function(fun = dnorm,
+                args = list(mean = mean(repeticoes_media_chinstrap, na.rm = TRUE), sd = sd(repeticoes_media_chinstrap, na.rm = TRUE)),
+                color = "black",
+                size = 1) +
+  stat_function(fun = dnorm,
+                args = list(mean = mean(repeticoes_media_chinstrap, na.rm = TRUE), sd = sd(repeticoes_media_chinstrap, na.rm = TRUE)),
+                geom = "area",
+                xlim = c(194, lim_inf_boot_chinstrap),
+                fill = "#a76bcf",
+                alpha = 0.7) +
+  stat_function(fun = dnorm,
+                args = list(mean = mean(repeticoes_media_chinstrap, na.rm = TRUE), sd = sd(repeticoes_media_chinstrap, na.rm = TRUE)),
+                geom = "area",
+                xlim = c(lim_sup_boot_chinstrap, 198),
+                fill = "#a76bcf",
+                alpha = 0.7) +
+  theme_minimal() +
+  labs(title = "",
+      subtitle = "Para espécie Chinstrap",
+      x = "Comprimento da Nadadeira (mm)",
+      y = "Densidade")
+
+
+
+grid.arrange(g11,g22,g33,g44,g55,g66, top = "Análise Conjunta")
+```
+
+### Comparação
+
+```{r}
+# Aqui que eu faço a tabelinha com a comparação dos limites
+resultados <- data.frame(
+  Espécie = c("Chinstrap", "Gentoo", "Adelie"),
+  Limite_Inferior = c(lim_inf_boot_chinstrap, lim_inf_boot_gentoo, lim_inf_boot_adelie),
+  Limite_Superior = c(lim_sup_boot_chinstrap, lim_sup_boot_gentoo, lim_inf_boot_adelie)
+)
+
+knitr::kable(resultados, caption = "Limites Inferiores e Superiores para as espécies Chinstrap e Gentoo")
+
+```
 :::
