@@ -97,6 +97,7 @@ media_gentoo <- data.frame(
 )
 
 ```
+# Introdução
 
 ## Sobre o Dataset 
 
@@ -120,14 +121,13 @@ media_gentoo <- data.frame(
 ## Contexto
 
 ::: columns
-::: {.column width="65%"}
+::: {.column width="55%"}
 
-- Coletados em Palmer Station, península localizada na Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Papúa e Gentoo. 
-- Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.
+- Coletados em Palmer Station, na Península Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Papúa e Gentoo. Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.
 :::
 
-::: {.column width="35%"}
-![](bg_img/madagascar.png){.absolute  width="550" height="300"}
+::: {.column width="45%"}
+![](bg_img/madagascar.png){.absolute  width="450" height="300"}
 :::
 :::
 
@@ -191,10 +191,114 @@ knitr::kable(t(media_gentoo)) %>%
 ```
 :::
 :::
-## Intervalo de confiança
 
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+## Visão Geral
+
+::: columns
+
+Iniciamos a análise com uma visão geral sobre o dataset escolhido: 
+
+::: {.column width="50%"}
+
+![](bg_img/var_explanation.png)
+:::
+
+::: {.column width="50%"}
+```{r Análise Exploratória,include=FALSE, warning=FALSE}
+vars <- c(
+  "Total de observações",
+  "Quant. de machos",
+  "Quant. de fêmeas",
+  "Menor comprimento do bico",
+  "Maior comprimento do bico",
+  "Menor profundidade do bico",
+  "Maior profundidade do bico",
+  "Menor comprimento da nadadeira",
+  "Maior comprimento da nadadeira",
+  "Menor massa corporal",
+  "Maior massa corporal"
+)
+
+species_resum <- penguins_db %>%
+  group_by(species) %>%
+  summarize(nrows_species = n(),
+    male_count = sum(ifelse(sex == "male", 1, 0), na.rm = TRUE),
+    female_count = sum(ifelse(sex == "female", 1, 0), na.rm = TRUE),
+    bill_length_min = min(bill_length_mm, na.rm = TRUE),
+    bill_length_max = max(bill_length_mm, na.rm = TRUE),
+    bill_depth_min = min(bill_depth_mm, na.rm = TRUE),
+    bill_depth_max = max(bill_depth_mm, na.rm = TRUE),
+    flipper_length_min = min(flipper_length_mm, na.rm = TRUE),
+    flipper_length_max = max(flipper_length_mm, na.rm = TRUE),
+    body_mass_min = min(body_mass_g, na.rm = TRUE),
+    body_mass_max = max(body_mass_g, na.rm = TRUE),
+  ) %>%
+  rename(
+    "Total de observações" = nrows_species,
+    "Quant. de machos" = male_count,
+    "Quant. de fêmeas" = female_count,
+    "Menor comprimento do bico (mm)" = bill_length_min,
+    "Maior comprimento do bico (mm)" = bill_length_max,
+    "Menor profundidade do bico (mm)" = bill_depth_min,
+    "Maior profundidade do bico (mm)" = bill_depth_max,
+    "Menor comprimento da nadadeira (mm)" = flipper_length_min,
+    "Maior comprimento da nadadeira (mm)" = flipper_length_max,
+    "Menor massa corporal (g)" = body_mass_min,
+    "Maior massa corporal (g)" = body_mass_max
+  )
+```
 
 ```{r}
-1 + 1
+knitr::kable(t(species_resum[, 2:ncol(species_resum)]),
+             col.names = c(species_resum$species)) %>%
+  kable_styling(font_size = 17.5)
 ```
+:::
+:::
+
+# Pesquisas
+
+## Estudo Adelie
+Com o objetivo de cálcular o intervalo de confiança para a espécie Adelie, criamos um data base com apenas as observações da espécie de interesse nele, abaixo está o resumo:
+
+::: {.panel-tabset}
+
+### As primeiras 6 observações:
+
+```{r Data Base Explicação, warning=FALSE}
+
+knitr::kable(head(species_separadas_adelie[, 2:ncol(species_separadas_adelie)]),
+  col.names = penguins_db_header[-1],
+  align = "ccrrrrcc"
+) %>%
+  kable_styling(font_size = 20)
+```
+
+### Intervalo de confiança:
+
+
+```{r Curva Teórica Explicação, warning=FALSE, message=FALSE}
+
+set.seed(1234)
+
+#Histrograma da variável Flipper Lenght
+flipper_lenght_adelie <- ggplot(data = data.frame(x = species_separadas_adelie$flipper_length_mm),
+       aes(x = x)) +
+  geom_histogram(color = "#00a6ff") +
+  labs(title = "Histograma dos dados da Amostra",
+       x = "Comprimento da Nadadeira (mm)",
+       y = "Frequência")
+
+# Única maneira que eu encontrei de fazer o gráfico ficar de maneira correta
+# no tabs...
+# To salvando em imagem o gráfico, e adicionando em baixo
+# Histograma dos dados da variável Comprimento da Nadadeira (mm)
+ggsave("flipper_lenght_adelie.png", plot = flipper_lenght_adelie)
+
+```
+![](flipper_lenght_adelie.png){width="1000" height="500"}
+
+::: footer
+.
+:::
+:::

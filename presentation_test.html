@@ -243,6 +243,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -333,6 +334,11 @@
 </div>
 
 </section>
+<section>
+<section id="introdução" class="title-slide slide level1 center">
+<h1>Introdução</h1>
+
+</section>
 <section id="sobre-o-dataset" class="slide level2">
 <h2>Sobre o Dataset</h2>
 <div class="columns">
@@ -351,13 +357,13 @@
 <section id="contexto" class="slide level2">
 <h2>Contexto</h2>
 <div class="columns">
-<div class="column" style="width:65%;">
+<div class="column" style="width:55%;">
 <ul>
 <li>Coletados em Palmer Station, península localizada na Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Papúa e Gentoo.</li>
 <li>Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.</li>
 </ul>
-</div><div class="column" style="width:35%;">
-<p><img data-src="bg_img/madagascar.png" class="absolute" style="width: 550px; height: 300px; "></p>
+</div><div class="column" style="width:45%;">
+<p><img data-src="bg_img/madagascar.png" class="absolute" style="width: 450px; height: 300px; "></p>
 </div>
 </div>
 </section>
@@ -590,14 +596,204 @@
 </div>
 </div>
 </section>
-<section id="intervalo-de-confiança" class="slide level2">
-<h2>Intervalo de confiança</h2>
-<p>When you click the <strong>Render</strong> button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
+<section id="visão-geral" class="slide level2">
+<h2>Visão Geral</h2>
+<div class="columns">
+<p>Iniciamos a análise com uma visão geral sobre o dataset escolhido:</p><div class="column" style="width:50%;">
+<p><img data-src="bg_img/var_explanation.png"></p>
+</div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<div class="cell-output-display">
+<table class="table" data-quarto-postprocess="true" style="font-size: 17.5px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Adelie</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Chinstrap</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Gentoo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Total de observações</td>
+<td style="text-align: right;">152.0</td>
+<td style="text-align: right;">68.0</td>
+<td style="text-align: right;">124.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Quant. de machos</td>
+<td style="text-align: right;">73.0</td>
+<td style="text-align: right;">34.0</td>
+<td style="text-align: right;">61.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Quant. de fêmeas</td>
+<td style="text-align: right;">73.0</td>
+<td style="text-align: right;">34.0</td>
+<td style="text-align: right;">58.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Menor comprimento do bico (mm)</td>
+<td style="text-align: right;">32.1</td>
+<td style="text-align: right;">40.9</td>
+<td style="text-align: right;">40.9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Maior comprimento do bico (mm)</td>
+<td style="text-align: right;">46.0</td>
+<td style="text-align: right;">58.0</td>
+<td style="text-align: right;">59.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Menor profundidade do bico (mm)</td>
+<td style="text-align: right;">15.5</td>
+<td style="text-align: right;">16.4</td>
+<td style="text-align: right;">13.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Maior profundidade do bico (mm)</td>
+<td style="text-align: right;">21.5</td>
+<td style="text-align: right;">20.8</td>
+<td style="text-align: right;">17.3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Menor comprimento da nadadeira (mm)</td>
+<td style="text-align: right;">172.0</td>
+<td style="text-align: right;">178.0</td>
+<td style="text-align: right;">203.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Maior comprimento da nadadeira (mm)</td>
+<td style="text-align: right;">210.0</td>
+<td style="text-align: right;">212.0</td>
+<td style="text-align: right;">231.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Menor massa corporal (g)</td>
+<td style="text-align: right;">2850.0</td>
+<td style="text-align: right;">2700.0</td>
+<td style="text-align: right;">3950.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Maior massa corporal (g)</td>
+<td style="text-align: right;">4775.0</td>
+<td style="text-align: right;">4800.0</td>
+<td style="text-align: right;">6300.0</td>
+</tr>
+</tbody>
+</table>
+
+
 </div>
 </div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="pesquisas" class="title-slide slide level1 center">
+<h1>Pesquisas</h1>
+
+</section>
+<section id="estudo-adelie" class="slide level2">
+<h2>Estudo Adelie</h2>
+<p>Com o objetivo de cálcular o intervalo de confiança para a espécie Adelie, criamos um data base com apenas as observações da espécie de interesse nele, abaixo está o resumo:</p>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">As primeiras 6 observações:</a></li><li><a href="#tabset-1-2">Intervalo de confiança:</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="cell">
+<div class="cell-output-display">
+<table class="table" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Specie</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Island</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Bill Length (mm)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Bill Depth (mm)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Flipper Length (mm)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Body Mass (g)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Sex</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Adelie</td>
+<td style="text-align: center;">Torgersen</td>
+<td style="text-align: right;">39.1</td>
+<td style="text-align: right;">18.7</td>
+<td style="text-align: right;">181</td>
+<td style="text-align: right;">3750</td>
+<td style="text-align: center;">male</td>
+<td style="text-align: center;">2007</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Adelie</td>
+<td style="text-align: center;">Torgersen</td>
+<td style="text-align: right;">39.5</td>
+<td style="text-align: right;">17.4</td>
+<td style="text-align: right;">186</td>
+<td style="text-align: right;">3800</td>
+<td style="text-align: center;">female</td>
+<td style="text-align: center;">2007</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Adelie</td>
+<td style="text-align: center;">Torgersen</td>
+<td style="text-align: right;">40.3</td>
+<td style="text-align: right;">18.0</td>
+<td style="text-align: right;">195</td>
+<td style="text-align: right;">3250</td>
+<td style="text-align: center;">female</td>
+<td style="text-align: center;">2007</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Adelie</td>
+<td style="text-align: center;">Torgersen</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">2007</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Adelie</td>
+<td style="text-align: center;">Torgersen</td>
+<td style="text-align: right;">36.7</td>
+<td style="text-align: right;">19.3</td>
+<td style="text-align: right;">193</td>
+<td style="text-align: right;">3450</td>
+<td style="text-align: center;">female</td>
+<td style="text-align: center;">2007</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Adelie</td>
+<td style="text-align: center;">Torgersen</td>
+<td style="text-align: right;">39.3</td>
+<td style="text-align: right;">20.6</td>
+<td style="text-align: right;">190</td>
+<td style="text-align: right;">3650</td>
+<td style="text-align: center;">male</td>
+<td style="text-align: center;">2007</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<p><img data-src="flipper_lenght_adelie.png" width="1000" height="500"></p>
+<div class="footer">
+<p>.</p>
+</div>
+</div>
+</div>
+</div>
+<p><img src="bg_img/OIP.jpg" class="slide-logo"></p>
+<div class="footer footer-default">
 <div class="quarto-auto-generated-content">
 <p><img src="bg_img/tux.png" class="slide-logo"></p>
 <div class="footer footer-default">
