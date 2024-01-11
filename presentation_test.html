@@ -8,7 +8,7 @@
 <link href="presentation_test_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="presentation_test_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="presentation_test_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.541">
+  <meta name="generator" content="quarto-1.3.450">
 
   <title>Desvendando o Mundo dos Penguins com o Dataset Palmer Penguins 🐧</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -155,8 +155,7 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -243,7 +242,6 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
-      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -320,6 +318,7 @@
       margin-right: 0; 
     }
   </style>
+  
   <script src="presentation_test_files/libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="presentation_test_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
@@ -359,8 +358,7 @@
 <div class="columns">
 <div class="column" style="width:55%;">
 <ul>
-<li>Coletados em Palmer Station, península localizada na Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Papúa e Gentoo.</li>
-<li>Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.</li>
+<li>Coletados em Palmer Station, na Península Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Chinstrap e Gentoo. Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.</li>
 </ul>
 </div><div class="column" style="width:45%;">
 <p><img data-src="bg_img/madagascar.png" class="absolute" style="width: 450px; height: 300px; "></p>
@@ -389,84 +387,84 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">Chinstrap</td>
-<td style="text-align: center;">Dream</td>
-<td style="text-align: right;">43.2</td>
-<td style="text-align: right;">16.6</td>
-<td style="text-align: right;">187</td>
-<td style="text-align: right;">2900</td>
-<td style="text-align: center;">female</td>
+<td style="text-align: center;">Gentoo</td>
+<td style="text-align: center;">Biscoe</td>
+<td style="text-align: right;">50.0</td>
+<td style="text-align: right;">15.2</td>
+<td style="text-align: right;">218</td>
+<td style="text-align: right;">5700</td>
+<td style="text-align: center;">male</td>
 <td style="text-align: center;">2007</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Adelie</td>
+<td style="text-align: center;">Gentoo</td>
 <td style="text-align: center;">Biscoe</td>
-<td style="text-align: right;">41.4</td>
-<td style="text-align: right;">18.6</td>
-<td style="text-align: right;">191</td>
-<td style="text-align: right;">3700</td>
+<td style="text-align: right;">45.1</td>
+<td style="text-align: right;">14.5</td>
+<td style="text-align: right;">207</td>
+<td style="text-align: right;">5050</td>
+<td style="text-align: center;">female</td>
+<td style="text-align: center;">2007</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Chinstrap</td>
+<td style="text-align: center;">Dream</td>
+<td style="text-align: right;">54.2</td>
+<td style="text-align: right;">20.8</td>
+<td style="text-align: right;">201</td>
+<td style="text-align: right;">4300</td>
 <td style="text-align: center;">male</td>
 <td style="text-align: center;">2008</td>
 </tr>
-<tr class="odd">
-<td style="text-align: center;">Adelie</td>
-<td style="text-align: center;">Torgersen</td>
-<td style="text-align: right;">38.6</td>
-<td style="text-align: right;">17.0</td>
-<td style="text-align: right;">188</td>
-<td style="text-align: right;">2900</td>
-<td style="text-align: center;">female</td>
-<td style="text-align: center;">2009</td>
-</tr>
 <tr class="even">
-<td style="text-align: center;">Adelie</td>
-<td style="text-align: center;">Dream</td>
-<td style="text-align: right;">41.5</td>
-<td style="text-align: right;">18.5</td>
-<td style="text-align: right;">201</td>
-<td style="text-align: right;">4000</td>
-<td style="text-align: center;">male</td>
-<td style="text-align: center;">2009</td>
+<td style="text-align: center;">Gentoo</td>
+<td style="text-align: center;">Biscoe</td>
+<td style="text-align: right;">43.6</td>
+<td style="text-align: right;">13.9</td>
+<td style="text-align: right;">217</td>
+<td style="text-align: right;">4900</td>
+<td style="text-align: center;">female</td>
+<td style="text-align: center;">2008</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Adelie</td>
+<td style="text-align: center;">Chinstrap</td>
 <td style="text-align: center;">Dream</td>
-<td style="text-align: right;">42.2</td>
-<td style="text-align: right;">18.5</td>
-<td style="text-align: right;">180</td>
-<td style="text-align: right;">3550</td>
-<td style="text-align: center;">female</td>
+<td style="text-align: right;">52.0</td>
+<td style="text-align: right;">19.0</td>
+<td style="text-align: right;">197</td>
+<td style="text-align: right;">4150</td>
+<td style="text-align: center;">male</td>
 <td style="text-align: center;">2007</td>
 </tr>
 <tr class="even">
+<td style="text-align: center;">Chinstrap</td>
+<td style="text-align: center;">Dream</td>
+<td style="text-align: right;">48.5</td>
+<td style="text-align: right;">17.5</td>
+<td style="text-align: right;">191</td>
+<td style="text-align: right;">3400</td>
+<td style="text-align: center;">male</td>
+<td style="text-align: center;">2007</td>
+</tr>
+<tr class="odd">
 <td style="text-align: center;">Adelie</td>
-<td style="text-align: center;">Torgersen</td>
-<td style="text-align: right;">38.7</td>
-<td style="text-align: right;">19.0</td>
-<td style="text-align: right;">195</td>
+<td style="text-align: center;">Dream</td>
+<td style="text-align: right;">36.0</td>
+<td style="text-align: right;">17.9</td>
+<td style="text-align: right;">190</td>
 <td style="text-align: right;">3450</td>
 <td style="text-align: center;">female</td>
 <td style="text-align: center;">2007</td>
 </tr>
-<tr class="odd">
-<td style="text-align: center;">Gentoo</td>
-<td style="text-align: center;">Biscoe</td>
-<td style="text-align: right;">50.0</td>
-<td style="text-align: right;">15.3</td>
-<td style="text-align: right;">220</td>
-<td style="text-align: right;">5550</td>
-<td style="text-align: center;">male</td>
-<td style="text-align: center;">2007</td>
-</tr>
 <tr class="even">
 <td style="text-align: center;">Gentoo</td>
 <td style="text-align: center;">Biscoe</td>
-<td style="text-align: right;">42.7</td>
-<td style="text-align: right;">13.7</td>
-<td style="text-align: right;">208</td>
-<td style="text-align: right;">3950</td>
+<td style="text-align: right;">43.4</td>
+<td style="text-align: right;">14.4</td>
+<td style="text-align: right;">218</td>
+<td style="text-align: right;">4600</td>
 <td style="text-align: center;">female</td>
-<td style="text-align: center;">2008</td>
+<td style="text-align: center;">2009</td>
 </tr>
 </tbody>
 </table>
@@ -475,7 +473,7 @@
 </div>
 </div>
 </div><div class="column" style="width:40%;">
-<p><img data-src="bg_img/var_explanation.png">{width: 200px; height: auto}</p>
+<p><img data-src="bg_img/var_explanation.png"></p>
 </div>
 </div>
 </section>
@@ -798,69 +796,11 @@
 <h2>IC (Com Bootstrap!)</h2>
 <p>O intervalo de confiança pode ser cálculado utilizando a fórmula ou usando Bootstrapping!</p>
 <p>Um exemplo de como o bootstrap funciona: <img data-src="bg_img/bootimg.png" class="r-stretch" width="1040" height="300"></p>
-</section>
-<section id="na-prática" class="slide level2">
-<h2>Na prática</h2>
-<div class="panel-tabset">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Intervalo Bootstraping</a></li><li><a href="#tabset-2-2">IC - Curva Teórica</a></li><li><a href="#tabset-2-3">Comparação</a></li></ul>
-<div class="tab-content">
-<div id="tabset-2-1">
-<p>Os gráficos abaixo são, respectivamente, o histograma das médias das amostras geradas pelo Bootstrapping e a curva Teórica:</p>
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="presentation_test_files/figure-revealjs/Intervalo%20de%20Confiança-1.png" width="960"></p>
-</div>
-</div>
-</div>
-<div id="tabset-2-2">
-<p>Verifica-se a Curva Normal Teórica com o Intervalo de confiança calculado na curva teórica!</p>
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="presentation_test_files/figure-revealjs/Intervalo%20com%20Curva%20Teórica-1.png" width="960"></p>
-</div>
-</div>
-</div>
-<div id="tabset-2-3">
-<p>Verifica-se que os intervalos de confiança com fórmula e com bootstrap são os mesmos:</p>
-<div class="cell">
-<div class="cell-output-display">
-<table data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">Fórmula</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Bootstrap</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Limite Inferior</td>
-<td style="text-align: center;">188.9140</td>
-<td style="text-align: right;">188.9252</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Limite Sperior</td>
-<td style="text-align: center;">190.9932</td>
-<td style="text-align: right;">190.9886</td>
-</tr>
-</tbody>
-</table>
-
-
-</div>
-</div>
-</div>
-</div>
-</div>
-<p><img src="bg_img/OIP.jpg" class="slide-logo"></p>
-<div class="footer footer-default">
-<div class="quarto-auto-generated-content">
 <p><img src="bg_img/tux.png" class="slide-logo"></p>
 <div class="footer footer-default">
 <p>Davi Augusto, Diogo Bolzan, João Arend, Luan Frederico</p>
 </div>
-</div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -887,6 +827,7 @@
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
+'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1185,9 +1126,10 @@
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      function tippyHover(el, contentFn) {
         const config = {
           allowHTML: true,
+          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1197,17 +1139,8 @@
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start',
+          placement: 'bottom-start'
         };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 

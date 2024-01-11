@@ -7,6 +7,7 @@ title-slide-attributes:
 
 format: 
   revealjs:
+    scrollable: true
     logo: bg_img/tux.png
     footer: Davi Augusto, Diogo Bolzan, João Arend, Luan Frederico
     theme: [default, dd.scss]
@@ -123,7 +124,7 @@ media_gentoo <- data.frame(
 ::: columns
 ::: {.column width="55%"}
 
-- Coletados em Palmer Station, na Península Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Papúa e Gentoo. Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.
+- Coletados em Palmer Station, na Península Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Chinstrap e Gentoo. Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.
 :::
 
 ::: {.column width="45%"}
