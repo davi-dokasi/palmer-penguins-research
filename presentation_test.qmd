@@ -7,8 +7,7 @@ title-slide-attributes:
 
 format: 
   revealjs:
-    scrollable: true
-    logo: bg_img/OIP.jpg
+    logo: bg_img/tux.png
     footer: Davi Augusto, Diogo Bolzan, João Arend, Luan Frederico
     theme: [default, dd.scss]
     
@@ -23,7 +22,6 @@ library(patchwork)
 library(ggplot2)
 library(magick)
 library(tidyr)
-#nstall.packages("kableExtra")
 library(kableExtra)
 
 # DOCUMENTAÇÃO DO QUARTO https://quarto.org/docs/presentations/revealjs/
@@ -36,7 +34,6 @@ penguins_db_header <- c("Index", "Specie",
                         "Island", "Bill Length (mm)",
                         "Bill Depth (mm)", "Flipper Length (mm)",
                         "Body Mass (g)", "Sex", "Year")
-print(penguins_db)
 
 #Criando um subset para cada espécie:
 species_unique <- unique(penguins_db$species)
@@ -121,13 +118,12 @@ media_gentoo <- data.frame(
 :::
 :::
 
-
 ## Contexto
 
 ::: columns
 ::: {.column width="55%"}
 
-- Coletados em Palmer Station, na Península Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Chinstrap e Gentoo. Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.
+- Coletados em Palmer Station, na Península Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Papúa e Gentoo. Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.
 :::
 
 ::: {.column width="45%"}
@@ -138,24 +134,23 @@ media_gentoo <- data.frame(
 ## Apresentando o dataset
 
 ::: columns
-::: {.column width="45%"}
+::: {.column width="60%"}
+Exemplo de uma pequena amostra aleatória do dataset:
 
-![](bg_img/islands.jpeg){.absolute  width="470" height="470"}
-
-:::
-
-::: {.column width="55%"}
-Aqui está uma breve apresentação das variáveis, e do nosso dataset utilizado:
 ```{r}
 
-knitr::kable(tail(species_separadas_adelie[, 2:ncol(species_separadas_adelie)]),
+knitr::kable(penguins_db[sample(nrow(penguins_db), 8), 2:ncol(penguins_db)],
   col.names = penguins_db_header[-1],
   align = "ccrrrrcc"
 )  %>%
     kable_styling(full_width = F, font_size = 17)
 ```
 :::
+::: {.column width="40%"}
 
+![](bg_img/var_explanation.png)
+
+:::
 :::
 
 ## Sobre as espécies
@@ -166,6 +161,7 @@ knitr::kable(tail(species_separadas_adelie[, 2:ncol(species_separadas_adelie)]),
 - ![](bg_img/adelie.jpg){width="200" height="200"}
 
 ```{r attr.output='.incremental'}
+
 knitr::kable(t(media_adelie)) %>%
   kable_styling(full_width = F, position = "center", font_size = 18)
 
