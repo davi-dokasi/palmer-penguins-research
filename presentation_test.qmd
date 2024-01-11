@@ -125,13 +125,13 @@ media_gentoo <- data.frame(
 ## Contexto
 
 ::: columns
-::: {.column width="65%"}
+::: {.column width="55%"}
 
 - Coletados em Palmer Station, na Península Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Chinstrap e Gentoo. Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.
 :::
 
-::: {.column width="35%"}
-![](bg_img/madagascar.png){.absolute  width="550" height="300"}
+::: {.column width="45%"}
+![](bg_img/madagascar.png){.absolute  width="450" height="300"}
 :::
 :::
 
@@ -300,7 +300,7 @@ flipper_lenght_adelie <- ggplot(data = data.frame(x = species_separadas_adelie$f
 ggsave("flipper_lenght_adelie.png", plot = flipper_lenght_adelie)
 
 ```
-![](flipper_lenght_adelie.png){width="1000" height="450"}
+![](flipper_lenght_adelie.png){width="1000" height="500"}
 
 ::: footer
 .
