@@ -372,7 +372,6 @@ lim_sup_boot  <- qnorm(p = 0.025,
 # lim_inf <- media_adelie - z * sd_adelie/sqrt(n)
 # lim_sup <- media_adelie + z * sd_adelie/sqrt(n)
 
-
 ```
 
 Um exemplo de como o bootstrap funciona:
@@ -383,25 +382,24 @@ Um exemplo de como o bootstrap funciona:
 ::: {.panel-tabset}
 
 ### Intervalo Bootstraping
-Os gráficos abaixo são, respectivamente, o histograma das médias das amostras geradas pelo Bootstrapping e a curva Teórica:
 
 ```{r Intervalo de Confiança,warning=FALSE}
 # Criando os gráficos
 #Histograma Do BootStrapinng
 
-g1 <- ggplot(data = data, aes(x = x)) +
-  geom_histogram(aes(y = after_stat(density)),
-  fill = "#FC9E21",
-  binwidth = 0.1,
-  color = "black") +
-  theme_minimal() +
-  labs(title = "Histograma das médias geradas pelo BootStraping",
-       subtitle = "Espécie Adelie considerando o comprimento da nadadeira",
-       x = "Comprimento da Nadadeira (mm)",
-       y = "Densidade",
-       fill = "Distribuição")
+# ggplot(data = data, aes(x = x)) +
+#   geom_histogram(aes(y = after_stat(density)),
+#   fill = "#FC9E21",
+#   binwidth = 0.1,
+#   color = "black") +
+#   theme_minimal() +
+#   labs(title = "Histograma das médias geradas pelo BootStraping",
+#        subtitle = "Espécie Adelie considerando o comprimento da nadadeira",
+#        x = "Comprimento da Nadadeira (mm)",
+#        y = "Densidade",
+#        fill = "Distribuição")
 
-g2 <- ggplot(data = data, aes(x = x)) +
+ggplot(data = data, aes(x = x)) +
   geom_histogram(aes(y = after_stat(density)),
   fill = "#FC9E21",
   binwidth = 0.1,
@@ -417,9 +415,6 @@ g2 <- ggplot(data = data, aes(x = x)) +
        x = "Comprimento da Nadadeira (mm)",
        y = "Densidade",
        fill = "Distribuição")
-
-g1 / g2
-
 
 ```
 
@@ -448,17 +443,17 @@ ggplot(data = data, aes(x = x)) +
                 xlim = c(lim_sup, 192)) +
   theme_minimal() +
   labs(title = "Curva Normal das Médias Geradas pelo BootStraping considerando IC",
-       subtitle = "Para Espécie Adélie Considerando a Variável Comprimento do Bico",
+       subtitle = "Para espécie Adélie considerando o comprimento da nadadeira",
        x = "Comprimento da Nadadeira (mm)",
        y = "Densidade",
        fill = "Distribuição") +
-  geom_text(x = 191.5, y = 0.7, label = "Limite Superior: 190.9 mm ", alpha = 0.02) +
-  geom_text(x = 191.458, y = 0.65, label = "Limite Inferior: 188.9 mm ", alpha = 0.02)
+  geom_text(x = 191.5, y = 0.7, label = "Limite Superior: 190.9 mm ", alpha = 0.02, size = 6) +
+  geom_text(x = 191.458, y = 0.62, label = "Limite Inferior: 188.9 mm ", alpha = 0.02, size = 6)
 
 ```
 
 ### Comparação
-Verifica-se que os intervalos de confiança com fórmula e com bootstrap são os mesmos:
+Verifica-se que os intervalos de confiança com fórmula 'tradicional' e com Bootstrap são praticamente os mesmos:
 
 ```{r Comparação, echo = FALSE, warning=FALSE}
 
