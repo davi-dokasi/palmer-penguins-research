@@ -125,7 +125,7 @@ media_gentoo <- data.frame(
 ::: columns
 ::: {.column width="65%"}
 
-- Coletados em Palmer Station, na Península Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Papúa e Gentoo. Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.
+- Coletados em Palmer Station, na Península Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Chinstrap e Gentoo. Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.
 :::
 
 ::: {.column width="35%"}
@@ -193,10 +193,67 @@ knitr::kable(t(media_gentoo)) %>%
 ```
 :::
 :::
-## Intervalo de confiança
 
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+## Visão Geral
+
+::: columns
+
+Iniciamos a análise com uma visão geral sobre o dataset escolhido: 
+
+::: {.column width="50%"}
+
+![](bg_img/var_explanation.png)
+:::
+
+::: {.column width="50%"}
+```{r Análise Exploratória,include=FALSE, warning=FALSE}
+vars <- c(
+  "Total de observações",
+  "Quant. de machos",
+  "Quant. de fêmeas",
+  "Menor comprimento do bico",
+  "Maior comprimento do bico",
+  "Menor profundidade do bico",
+  "Maior profundidade do bico",
+  "Menor comprimento da nadadeira",
+  "Maior comprimento da nadadeira",
+  "Menor massa corporal",
+  "Maior massa corporal"
+)
+
+species_resum <- penguins_db %>%
+  group_by(species) %>%
+  summarize(nrows_species = n(),
+    male_count = sum(ifelse(sex == "male", 1, 0), na.rm = TRUE),
+    female_count = sum(ifelse(sex == "female", 1, 0), na.rm = TRUE),
+    bill_length_min = min(bill_length_mm, na.rm = TRUE),
+    bill_length_max = max(bill_length_mm, na.rm = TRUE),
+    bill_depth_min = min(bill_depth_mm, na.rm = TRUE),
+    bill_depth_max = max(bill_depth_mm, na.rm = TRUE),
+    flipper_length_min = min(flipper_length_mm, na.rm = TRUE),
+    flipper_length_max = max(flipper_length_mm, na.rm = TRUE),
+    body_mass_min = min(body_mass_g, na.rm = TRUE),
+    body_mass_max = max(body_mass_g, na.rm = TRUE),
+  ) %>%
+  rename(
+    "Total de observações" = nrows_species,
+    "Quant. de machos" = male_count,
+    "Quant. de fêmeas" = female_count,
+    "Menor comprimento do bico (mm)" = bill_length_min,
+    "Maior comprimento do bico (mm)" = bill_length_max,
+    "Menor profundidade do bico (mm)" = bill_depth_min,
+    "Maior profundidade do bico (mm)" = bill_depth_max,
+    "Menor comprimento da nadadeira (mm)" = flipper_length_min,
+    "Maior comprimento da nadadeira (mm)" = flipper_length_max,
+    "Menor massa corporal (g)" = body_mass_min,
+    "Maior massa corporal (g)" = body_mass_max
+  )
+```
 
 ```{r}
-1 + 1
+knitr::kable(t(species_resum[, 2:ncol(species_resum)]),
+             col.names = c(species_resum$species)) %>%
+  kable_styling(font_size = 17.5)
 ```
+:::
+:::
