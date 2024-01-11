@@ -1,0 +1,51 @@
+// Import das fontes
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital@0;1&display=swap');
+
+/*-- scss:defaults --*/
+// Substituição das configurações do tema 
+// https://quarto.org/docs/presentations/revealjs/themes.html
+// Configurações base para todos os temas que podem opcionalmente ser substituidos
+
+// Background da apresentação
+$backgroundColor: #fcfbf9;
+
+// Primary/body text
+$mainFont: 'Jost', sans-serif;
+$mainFontSize: 30px;
+$mainColor: #333;
+
+// Espaço vertical entre blocos de texto
+$blockMargin: 20px;
+
+// Headings
+$headingMargin: 0 0 $blockMargin 0;
+$headingFont: 'Abhaya Libre', Impact, sans-serif;
+$headingColor: #006791;
+$headingLineHeight: 1.2;
+$headingLetterSpacing: normal;
+$headingTextTransform: none;
+$headingTextShadow: none;
+$headingFontWeight: normal;
+$heading1TextShadow: $headingTextShadow;
+
+$heading1Size: 3.00em;
+$heading2Size: 2.11em;
+$heading3Size: 1.55em;
+$heading4Size: 1.00em;
+
+$codeFont: monospace;
+
+// Links and actions
+$linkColor: #437597;
+$linkColorHover: darken( $linkColor, 20% );
+
+// Text selection
+$selectionBackgroundColor: #19647E;
+$selectionColor: #fff;
+
+// CSS aqui 
+.title {
+  font-family:'Source Sans Pro', Helvetica, sans-serif !important;
+  color: black !important;
+}

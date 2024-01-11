@@ -1,0 +1,202 @@
+---
+title: Desvendando o Mundo dos Penguins com o Dataset Palmer Penguins 🐧
+title-slide-attributes:
+    data-background-image: bg_img/penguins_bg.png
+    data-background-size: contain
+    data-background-opacity: "0.35"
+
+format: 
+  revealjs:
+    logo: bg_img/OIP.jpg
+    footer: Davi Augusto, Diogo Bolzan, João Arend, Luan Frederico
+    theme: [default, dd.scss]
+    
+---
+```{r inicial, include=FALSE, warning=FALSE}
+
+#Bibliotecas Usadas:
+library(readr)
+library(dplyr)
+library(gridExtra)
+library(patchwork)
+library(ggplot2)
+library(magick)
+library(tidyr)
+#nstall.packages("kableExtra")
+library(kableExtra)
+
+# DOCUMENTAÇÃO DO QUARTO https://quarto.org/docs/presentations/revealjs/
+
+#Carregando o Data Base Penguins:
+penguins_db <- read_csv("penguins.csv")
+
+# Header para tabelas knit do database original
+penguins_db_header <- c("Index", "Specie",
+                        "Island", "Bill Length (mm)",
+                        "Bill Depth (mm)", "Flipper Length (mm)",
+                        "Body Mass (g)", "Sex", "Year")
+print(penguins_db)
+
+#Criando um subset para cada espécie:
+species_unique <- unique(penguins_db$species)
+islands_unique <- unique(penguins_db$island)
+nrows_species <- c()
+nrows_species_male <- c()
+nrows_species_female <- c()
+
+for (spec in species_unique) {
+  # Banco de dados
+  subset_name <- paste("species_separadas_", tolower(spec), sep = "")
+  assign(subset_name, penguins_db[penguins_db$species == spec, ])
+  # Número de registros por espécie
+  nrows_name <- paste("nrows_", tolower(spec), sep = "")
+  assign(nrows_name, nrow(penguins_db[penguins_db$species == spec, ]))
+
+  nrows_species <- c(nrows_species,
+                     nrow(penguins_db[penguins_db$species == spec, ]))
+
+  nrows_species_male <- c(nrows_species_male,
+                          nrow(penguins_db[penguins_db$species == spec &
+                                             penguins_db$sex == "male", ]))
+
+  nrows_species_female <- c(nrows_species_female,
+                            nrow(penguins_db[penguins_db$species == spec &
+                                               penguins_db$sex == "female", ]))
+}
+
+species_separadas_adelie_sem_na <- na.omit(species_separadas_adelie)
+species_separadas_chinstrap_sem_na <- na.omit(species_separadas_chinstrap)
+species_separadas_gentoo_sem_na <- na.omit(species_separadas_gentoo)
+
+media_adelie <- colMeans(species_separadas_adelie_sem_na[, c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")], na.rm = TRUE)
+media_chinstrap <- colMeans(species_separadas_chinstrap_sem_na[, c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")], na.rm = TRUE)
+media_gentoo <- colMeans(species_separadas_gentoo_sem_na[, c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")], na.rm = TRUE)
+
+names(media_adelie)[names(media_adelie) == "bill_length_mm"] <- "Médias"
+names(media_gentoo)[names(media_gentoo) == "bill_length_mm"] <- "Médias"
+names(media_chinstrap)[names(media_chinstrap) == "bill_length_mm"] <- "Médias"
+
+#####################
+media_adelie <- data.frame(
+  "bill_length_mm_mean" = media_adelie["Médias"],
+  "bill_depth_mm_mean" = media_adelie["bill_depth_mm"],
+  "flipper_length_mm_mean" = media_adelie["flipper_length_mm"],
+  "body_mass_g_mean" = media_adelie["body_mass_g"]
+)
+
+media_chinstrap <- data.frame(
+  "bill_length_mm_mean" =media_chinstrap["Médias"],
+  "bill_depth_mm_mean" = media_chinstrap["bill_depth_mm"],
+  "flipper_length_mm_mean" = media_chinstrap["flipper_length_mm"],
+  "body_mass_g_mean" = media_chinstrap["body_mass_g"]
+)
+
+media_gentoo <- data.frame(
+  "bill_length_mm_mean" = media_gentoo["Médias"],
+  "bill_depth_mm_mean" = media_gentoo["bill_depth_mm"],
+  "flipper_length_mm_mean" = media_gentoo["flipper_length_mm"],
+  "body_mass_g_mean" = media_gentoo["body_mass_g"]
+)
+
+```
+
+## Sobre o Dataset 
+
+::: columns
+::: {.column width="55%"}
+- Além de um banco de dados no Kaggle, é um banco de dados "verdadeiro" e nativo do R
+
+- Os dados foram coletados e disponibilizados pela Dra. Kristen Gorman e pela Estação Palmer, Antártica, LTER (Long Term Ecological Research), membro da Rede de Pesquisa Ecológica de Longo Prazo.
+
+- 344 Pinguins
+
+- 3 espécies (Adélie, chinstrap e gentoo)
+:::
+
+::: {.column width="45%"}
+![](bg_img/kristen.jpg){.absolute  width="400" height="400"}
+
+:::
+:::
+
+
+## Contexto
+
+::: columns
+::: {.column width="65%"}
+
+- Coletados em Palmer Station, na Península Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Papúa e Gentoo. Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.
+:::
+
+::: {.column width="35%"}
+![](bg_img/madagascar.png){.absolute  width="550" height="300"}
+:::
+:::
+
+## Apresentando o dataset
+
+::: columns
+::: {.column width="45%"}
+
+![](bg_img/islands.jpeg){.absolute  width="470" height="470"}
+
+:::
+
+::: {.column width="55%"}
+Aqui está uma breve apresentação das variáveis, e do nosso dataset utilizado:
+```{r}
+
+knitr::kable(tail(species_separadas_adelie[, 2:ncol(species_separadas_adelie)]),
+  col.names = penguins_db_header[-1],
+  align = "ccrrrrcc"
+)  %>%
+    kable_styling(full_width = F, font_size = 17)
+```
+:::
+
+:::
+
+## Sobre as espécies
+::: columns
+::: {.column width="33%" .incremental}
+- Adélie 
+
+- ![](bg_img/adelie.jpg){width="200" height="200"}
+
+```{r attr.output='.incremental'}
+knitr::kable(t(media_adelie)) %>%
+  kable_styling(full_width = F, position = "center", font_size = 18)
+
+```
+
+:::
+::: {.column width="33%" .incremental}
+- Chinstrap
+
+- ![](bg_img/chinstrap.jpeg){width="200" height="200"}
+
+```{r attr.output='.incremental'}
+knitr::kable(t(media_chinstrap)) %>%
+  kable_styling(full_width = F, position = "center", font_size = 18)
+
+```
+:::
+::: {.column width="33%" .incremental}
+- Gentoo
+
+- ![](bg_img/gentoo.jpeg){width="200" height="200"}
+
+```{r attr.output='.incremental'}
+knitr::kable(t(media_gentoo)) %>%
+  kable_styling(full_width = F, position = "center", font_size = 18)
+
+```
+:::
+:::
+## Intervalo de confiança
+
+When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
