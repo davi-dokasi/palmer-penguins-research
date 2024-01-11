@@ -765,8 +765,68 @@
 </div>
 <div id="tabset-1-2">
 <p><img data-src="flipper_lenght_adelie.png" width="1000" height="500"></p>
+<p>limite inferior -&gt; 188.914, limite superior -&gt; 190.9932</p>
 <div class="footer">
 <p>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ic-com-bootstrap" class="slide level2">
+<h2>IC (Com Bootstrap!)</h2>
+<p>O intervalo de confiança pode ser cálculado utilizando a fórmula ou usando Bootstrapping!</p>
+<p>Um exemplo de como o bootstrap funciona: <img data-src="bg_img/bootimg.png" class="r-stretch" width="1040" height="300"></p>
+</section>
+<section id="na-prática" class="slide level2">
+<h2>Na prática</h2>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Intervalo Bootstraping</a></li><li><a href="#tabset-2-2">IC - Curva Teórica</a></li><li><a href="#tabset-2-3">Comparação</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<p>Os gráficos abaixo são, respectivamente, o histograma das médias das amostras geradas pelo Bootstrapping e a curva Teórica:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="presentation_test_files/figure-revealjs/Intervalo%20de%20Confiança-1.png" width="960"></p>
+</div>
+</div>
+</div>
+<div id="tabset-2-2">
+<p>Verifica-se a Curva Normal Teórica com o Intervalo de confiança calculado na curva teórica!</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="presentation_test_files/figure-revealjs/Intervalo%20com%20Curva%20Teórica-1.png" width="960"></p>
+</div>
+</div>
+</div>
+<div id="tabset-2-3">
+<p>Verifica-se que os intervalos de confiança com fórmula e com bootstrap são os mesmos:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Fórmula</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Bootstrap</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Limite Inferior</td>
+<td style="text-align: center;">188.9140</td>
+<td style="text-align: right;">188.9252</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Limite Sperior</td>
+<td style="text-align: center;">190.9932</td>
+<td style="text-align: right;">190.9886</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
 </div>
 </div>
 </div>

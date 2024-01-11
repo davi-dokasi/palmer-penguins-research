@@ -302,7 +302,178 @@ ggsave("flipper_lenght_adelie.png", plot = flipper_lenght_adelie)
 ```
 ![](flipper_lenght_adelie.png){width="1000" height="500"}
 
+
+limite inferior -> 188.914, limite superior -> 190.9932
+
 ::: footer
 .
 :::
+:::
+
+## IC (Com Bootstrap!)
+O intervalo de confiança pode ser cálculado utilizando a fórmula ou usando Bootstrapping!
+
+```{r, echo = FALSE, include=FALSE}
+
+#O limite inferior feito com a fórmula é de:
+#média da coluna comprimento do bico
+media_adelie <- mean(species_separadas_adelie$flipper_length_mm, na.rm = TRUE)
+
+# z <- qnorm(p = 0.025, mean = 0, sd = 1, lower.tail = FALSE) #Gerando Z-Score para 0.95 dos dados
+z <- qnorm(0.025, lower.tail = FALSE)
+
+# n <- length(species_separadas_adelie$species) #tamanho da amostra
+
+n <- nrow(species_separadas_adelie)
+
+sd_adelie <- sd(species_separadas_adelie$flipper_length_mm, na.rm = TRUE) #desvio padrão da amostra
+
+#Gerando o limite Inferior pela fórmula:
+lim_inf <- media_adelie - z * sd_adelie/sqrt(n)
+lim_inf
+
+#Gerando o limite Superior pela fórmula:
+lim_sup <- media_adelie + z * sd_adelie/sqrt(n)
+lim_sup
+
+```
+
+```{r Informações para Bootstraping, include=FALSE, warning=FALSE}
+
+#Bootstraping para gerar curva teórica
+n <- length(species_separadas_adelie$species) #tamanho da amostra
+
+#repetições da amostra
+n_repeticoes <- 10000
+
+#vetor que armazena as repetições de amostras
+repeticoes_media <- as.numeric(n_repeticoes)
+
+for (i in 1:n_repeticoes) {
+  amostra <- sample(species_separadas_adelie$flipper_length_mm,
+                    size = n,
+                    replace = TRUE)
+  repeticoes_media[i] <- mean(amostra, na.rm = TRUE)
+}
+
+# Criando o dataframe
+data <- data.frame(x = repeticoes_media)
+
+#Limite Inferior Bootstrap
+lim_inf_boot  <- qnorm(p = 0.025,
+                       mean = mean(repeticoes_media),
+                       sd = sd(repeticoes_media,
+                       na.rm = TRUE))
+
+#Limite Superior Bootstrap
+lim_sup_boot  <- qnorm(p = 0.025,
+                       mean = mean(repeticoes_media),
+                       sd = sd(repeticoes_media, na.rm = TRUE),
+                       lower.tail = FALSE)
+
+# #Armazenando os limites Inferior e Superior:
+# lim_inf <- media_adelie - z * sd_adelie/sqrt(n)
+# lim_sup <- media_adelie + z * sd_adelie/sqrt(n)
+
+
+```
+
+Um exemplo de como o bootstrap funciona:
+![](bg_img/bootimg.png){.r-stretch width="1040" height="300"}
+
+
+## Na prática
+::: {.panel-tabset}
+
+### Intervalo Bootstraping
+Os gráficos abaixo são, respectivamente, o histograma das médias das amostras geradas pelo Bootstrapping e a curva Teórica:
+
+```{r Intervalo de Confiança,warning=FALSE}
+# Criando os gráficos
+#Histograma Do BootStrapinng
+
+g1 <- ggplot(data = data, aes(x = x)) +
+  geom_histogram(aes(y = after_stat(density)),
+  fill = "#FC9E21",
+  binwidth = 0.1,
+  color = "black") +
+  theme_minimal() +
+  labs(title = "Histograma das médias geradas pelo BootStraping",
+       subtitle = "Espécie Adelie considerando o comprimento da nadadeira",
+       x = "Comprimento da Nadadeira (mm)",
+       y = "Densidade",
+       fill = "Distribuição")
+
+g2 <- ggplot(data = data, aes(x = x)) +
+  geom_histogram(aes(y = after_stat(density)),
+  fill = "#FC9E21",
+  binwidth = 0.1,
+  color = "black") +
+  stat_function(fun = dnorm,
+                args = list(mean = mean(data$x, na.rm = TRUE), 
+                            sd = sd(data$x, na.rm = TRUE)),
+                color = "#100818",
+                size = 1) +
+  theme_minimal() +
+  labs(title = "Histograma das médias geradas pelo BootStraping com Curva Teórica", # nolint: line_length_linter.
+       subtitle = "Espécie Adelie considerando o comprimento da nadadeira",
+       x = "Comprimento da Nadadeira (mm)",
+       y = "Densidade",
+       fill = "Distribuição")
+
+g1 / g2
+
+
+```
+
+
+### IC - Curva Teórica
+Verifica-se a Curva Normal Teórica com o Intervalo de confiança calculado na curva teórica!
+
+```{r Intervalo com Curva Teórica, warning=FALSE}
+#Intervalo de Confiança na curva teórica
+ggplot(data = data, aes(x = x)) +
+  stat_function(fun = dnorm,
+                args = list(mean = mean(data$x, na.rm = TRUE),
+                            sd = sd(data$x, na.rm = TRUE)),
+                color = "#100818", size = 1) +
+  stat_function(fun = dnorm,
+                args = list(mean = mean(data$x, na.rm = TRUE),
+                            sd = sd(data$x, na.rm = TRUE)),
+                geom = "area", fill = "blue",
+                alpha = 0.2,
+                xlim = c(188, lim_inf)) +
+  stat_function(fun = dnorm,
+                args = list(mean = mean(data$x, na.rm = TRUE),
+                            sd = sd(data$x, na.rm = TRUE)),
+                geom = "area", fill = "blue",
+                alpha = 0.2,
+                xlim = c(lim_sup, 192)) +
+  theme_minimal() +
+  labs(title = "Curva Normal das Médias Geradas pelo BootStraping considerando IC",
+       subtitle = "Para Espécie Adélie Considerando a Variável Comprimento do Bico",
+       x = "Comprimento da Nadadeira (mm)",
+       y = "Densidade",
+       fill = "Distribuição") +
+  geom_text(x = 191.5, y = 0.7, label = "Limite Superior: 190.9 mm ", alpha = 0.02) +
+  geom_text(x = 191.458, y = 0.65, label = "Limite Inferior: 188.9 mm ", alpha = 0.02)
+
+```
+
+### Comparação
+Verifica-se que os intervalos de confiança com fórmula e com bootstrap são os mesmos:
+
+```{r Comparação, echo = FALSE, warning=FALSE}
+
+comp_table <- matrix(c(lim_inf, lim_inf_boot, lim_sup, lim_sup_boot),
+                     nrow = 2, byrow = TRUE)
+
+colnames(comp_table) <- c("Fórmula", "Bootstrap")
+rownames(comp_table) <- c("Limite Inferior", "Limite Sperior")
+
+knitr::kable(comp_table,
+             align = "crr")
+
+```
+
 :::
