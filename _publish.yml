@@ -1,4 +1,4 @@
 - source: presentation_test.qmd
   quarto-pub:
     - id: 093d655d-403a-4718-bbe0-af4174966f2d
-      url: "https://nimrodds.quarto.pub/desvendando-o-mundo-dos-penguins-com-o-dataset-palmer-penguins-\U0001F427"
+      url: 'https://nimrodds.quarto.pub/club-penguin-palmer-penguins'

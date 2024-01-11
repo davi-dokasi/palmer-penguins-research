@@ -7,6 +7,7 @@ title-slide-attributes:
 
 format: 
   revealjs:
+    scrollable: true
     logo: bg_img/OIP.jpg
     footer: Davi Augusto, Diogo Bolzan, João Arend, Luan Frederico
     theme: [default, dd.scss]
@@ -99,6 +100,7 @@ media_gentoo <- data.frame(
 )
 
 ```
+# Introdução
 
 ## Sobre o Dataset 
 
@@ -255,5 +257,52 @@ knitr::kable(t(species_resum[, 2:ncol(species_resum)]),
              col.names = c(species_resum$species)) %>%
   kable_styling(font_size = 17.5)
 ```
+:::
+:::
+
+# Pesquisas
+
+## Estudo Adelie
+Com o objetivo de cálcular o intervalo de confiança para a espécie Adelie, criamos um data base com apenas as observações da espécie de interesse nele, abaixo está o resumo:
+
+::: {.panel-tabset}
+
+### As primeiras 6 observações:
+
+```{r Data Base Explicação, warning=FALSE}
+
+knitr::kable(head(species_separadas_adelie[, 2:ncol(species_separadas_adelie)]),
+  col.names = penguins_db_header[-1],
+  align = "ccrrrrcc"
+) %>%
+  kable_styling(font_size = 20)
+```
+
+### Intervalo de confiança:
+
+
+```{r Curva Teórica Explicação, warning=FALSE, message=FALSE}
+
+set.seed(1234)
+
+#Histrograma da variável Flipper Lenght
+flipper_lenght_adelie <- ggplot(data = data.frame(x = species_separadas_adelie$flipper_length_mm),
+       aes(x = x)) +
+  geom_histogram(color = "#00a6ff") +
+  labs(title = "Histograma dos dados da Amostra",
+       x = "Comprimento da Nadadeira (mm)",
+       y = "Frequência")
+
+# Única maneira que eu encontrei de fazer o gráfico ficar de maneira correta
+# no tabs...
+# To salvando em imagem o gráfico, e adicionando em baixo
+# Histograma dos dados da variável Comprimento da Nadadeira (mm)
+ggsave("flipper_lenght_adelie.png", plot = flipper_lenght_adelie)
+
+```
+![](flipper_lenght_adelie.png){width="1000" height="450"}
+
+::: footer
+.
 :::
 :::
