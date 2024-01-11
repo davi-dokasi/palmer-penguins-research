@@ -8,7 +8,7 @@
 <link href="presentation_test_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="presentation_test_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="presentation_test_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.4.541">
 
   <title>Desvendando o Mundo dos Penguins com o Dataset Palmer Penguins 🐧</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -155,7 +155,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -319,7 +320,6 @@
       margin-right: 0; 
     }
   </style>
-  
   <script src="presentation_test_files/libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="presentation_test_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
@@ -388,26 +388,6 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">Chinstrap</td>
-<td style="text-align: center;">Dream</td>
-<td style="text-align: right;">42.5</td>
-<td style="text-align: right;">17.3</td>
-<td style="text-align: right;">187</td>
-<td style="text-align: right;">3350</td>
-<td style="text-align: center;">female</td>
-<td style="text-align: center;">2009</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Adelie</td>
-<td style="text-align: center;">Dream</td>
-<td style="text-align: right;">40.3</td>
-<td style="text-align: right;">18.5</td>
-<td style="text-align: right;">196</td>
-<td style="text-align: right;">4350</td>
-<td style="text-align: center;">male</td>
-<td style="text-align: center;">2008</td>
-</tr>
-<tr class="odd">
 <td style="text-align: center;">Adelie</td>
 <td style="text-align: center;">Torgersen</td>
 <td style="text-align: right;">39.0</td>
@@ -427,24 +407,21 @@
 <td style="text-align: center;">female</td>
 <td style="text-align: center;">2007</td>
 </tr>
-<tr class="odd">
-<td style="text-align: center;">Adelie</td>
-<td style="text-align: center;">Torgersen</td>
-<td style="text-align: right;">46.0</td>
-<td style="text-align: right;">21.5</td>
-<td style="text-align: right;">194</td>
-<td style="text-align: right;">4200</td>
 <td style="text-align: center;">male</td>
-<td style="text-align: center;">2007</td>
+<td style="text-align: center;">2008</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Gentoo</td>
+<td style="text-align: center;">Biscoe</td>
+<td style="text-align: right;">44.5</td>
+<td style="text-align: right;">15.7</td>
+<td style="text-align: right;">217</td>
+<td style="text-align: right;">4875</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">2009</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Chinstrap</td>
-<td style="text-align: center;">Dream</td>
-<td style="text-align: right;">46.4</td>
-<td style="text-align: right;">18.6</td>
-<td style="text-align: right;">190</td>
-<td style="text-align: right;">3450</td>
-<td style="text-align: center;">female</td>
+
 <td style="text-align: center;">2007</td>
 </tr>
 <tr class="odd">
@@ -458,14 +435,8 @@
 <td style="text-align: center;">2008</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Gentoo</td>
+<td style="text-align: center;">Adelie</td>
 <td style="text-align: center;">Biscoe</td>
-<td style="text-align: right;">45.1</td>
-<td style="text-align: right;">14.4</td>
-<td style="text-align: right;">210</td>
-<td style="text-align: right;">4400</td>
-<td style="text-align: center;">female</td>
-<td style="text-align: center;">2008</td>
 </tr>
 </tbody>
 </table>
@@ -804,10 +775,6 @@
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Intervalo Bootstraping</a></li><li><a href="#tabset-2-2">IC - Curva Teórica</a></li><li><a href="#tabset-2-3">Comparação</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
-<p>Os gráficos abaixo são, respectivamente, o histograma das médias das amostras geradas pelo Bootstrapping e a curva Teórica:</p>
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="presentation_test_files/figure-revealjs/Intervalo%20de%20Confiança-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -815,7 +782,6 @@
 <p>Verifica-se a Curva Normal Teórica com o Intervalo de confiança calculado na curva teórica!</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="presentation_test_files/figure-revealjs/Intervalo%20com%20Curva%20Teórica-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -851,60 +817,10 @@
 </div>
 </div>
 </div>
-</section>
-<section id="todas-as-espécies" class="slide level2">
-<h2>Todas as espécies</h2>
-<div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Ánalise Conjunta</a></li></ul>
-<div class="tab-content">
-<div id="tabset-3-1">
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="presentation_test_files/figure-revealjs/Todas-1.png" width="960"></p>
-</div>
-</div>
-<section id="comparação-1" class="slide level2">
-<h2>Comparação</h2>
-<div class="cell">
-<div class="cell-output-display">
-<table data-quarto-postprocess="true">
-<caption>Limites Inferiores e Superiores para as espécies Chinstrap e Gentoo</caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Espécie</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Limite_Inferior</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Limite_Superior</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Chinstrap</td>
-<td style="text-align: right;">194.6908</td>
-<td style="text-align: right;">196.9689</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Gentoo</td>
-<td style="text-align: right;">216.1582</td>
-<td style="text-align: right;">218.2056</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Adelie</td>
-<td style="text-align: right;">188.9151</td>
-<td style="text-align: right;">188.9151</td>
-</tr>
-</tbody>
-</table>
-
-
-</div>
-</div>
-</section>
-</div>
-</div>
-</div>
 <p><img src="bg_img/tux.png" class="slide-logo"></p>
 <div class="footer footer-default">
 <p>Davi Augusto, Diogo Bolzan, João Arend, Luan Frederico</p>
+</div>
 </div>
 </section></section>
     </div>
@@ -933,7 +849,6 @@
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1232,10 +1147,9 @@
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1245,8 +1159,17 @@
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
