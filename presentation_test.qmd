@@ -651,7 +651,7 @@ knitr::kable(resultados, caption = "Limites Inferiores e Superiores para as esp�
 
 ## Teste de Hipótese!{.incremental}
 
- - Objetivo do Teste: Investigar se a proporção de pinguins das espécies Adélie, Chinstrap e Gentoo no conjunto de dados Palmer Penguins difere significativamente de uma distribuição equitativa, com uma proporção hipotética de 0.33333 e alpha 0.5 para cada espécie.
+ - Objetivo do Teste: Investigar se a proporção de pinguins das espécies Adélie, Chinstrap e Gentoo no conjunto de dados Palmer Penguins difere significativamente de uma distribuição equitativa, com uma proporção hipotética de 0.33333 e alpha 0.05 para cada espécie.
  
  - Contexto: Exploramos as proporções de cada espécie de pinguim para entender se a distribuição observada no conjunto de dados diverge da expectativa equitativa.
  
