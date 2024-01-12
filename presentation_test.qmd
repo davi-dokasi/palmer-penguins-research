@@ -698,7 +698,7 @@ p_valor_chinstrap = pnorm(z_chinstrap_1)*2
 p_valor_chinstrap
 
 p_valor_chinstrap < alpha
-# Como  pvalor é maior que o alfra, rejeitamos h0
+# Como alpha é maior que o pvalor, rejeitamos h0
 # Ao nível de 5%,os dados mostram que a proporção populacional de pinguins da espécie Chinstrap diferente de 0.3333(33%).
 ```
 
