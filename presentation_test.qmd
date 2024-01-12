@@ -127,46 +127,46 @@ knitr::kable(na.omit(penguins_db)[sample(nrow(na.omit(penguins_db)), 8), 2:ncol(
 :::
 
 ## Nossos Protagonistas
+
 ::: columns
-::: {.column width="33%" .incremental}
+::: {.column width="33%" .fragment}
 - Adélie 
  ![](bg_img/adelie_1.jpeg){width="290" height="auto"}
-
-```{r attr.output='.incremental'}
+ 
+```{r}
 
 knitr::kable(media_adelie, 
       col.names = "Médias") %>%
   kable_styling(full_width = F, position = "center", font_size = 18)
-
 ```
-
 :::
-::: {.column width="33%" .incremental}
+
+::: {.column width="33%" .fragment}
 - Chinstrap
  ![](bg_img/chinstrap.jpeg){width="290" height="auto"}
-
+ 
 ```{r attr.output='.incremental'}
 
 knitr::kable(media_chinstrap, 
       col.names = "Médias") %>%
   kable_styling(full_width = F, position = "center", font_size = 18)
-
 ```
+
 :::
-::: {.column width="33%" .incremental}
+
+::: {.column width="33%" .fragment}
 - Gentoo
  ![](bg_img/gentoo.jpeg){width="290" height="auto"}
-
+ 
 ```{r attr.output='.incremental'}
 
 knitr::kable(media_gentoo, 
       col.names = "Médias") %>%
   kable_styling(full_width = F, position = "center", font_size = 18)
-
 ```
-:::
-:::
 
+:::
+:::
 ## Sobre as espécies
 
 Uma visão geral sobre o dataset escolhido: 
@@ -651,7 +651,7 @@ knitr::kable(resultados, caption = "Limites Inferiores e Superiores para as esp�
 
 ## Teste de Hipótese!{.incremental}
 
- - Objetivo do Teste: Investigar se a proporção de pinguins das espécies Adélie, Chinstrap e Gentoo no conjunto de dados Palmer Penguins difere significativamente de uma distribuição equitativa, com uma proporção hipotética de 0.33 e alpha 0.5 para cada espécie.
+ - Objetivo do Teste: Investigar se a proporção de pinguins das espécies Adélie, Chinstrap e Gentoo no conjunto de dados Palmer Penguins difere significativamente de uma distribuição equitativa, com uma proporção hipotética de 0.33333 e alpha 0.5 para cada espécie.
  
  - Contexto: Exploramos as proporções de cada espécie de pinguim para entender se a distribuição observada no conjunto de dados diverge da expectativa equitativa.
  
@@ -663,9 +663,9 @@ knitr::kable(resultados, caption = "Limites Inferiores e Superiores para as esp�
 ### Adélie
 ```{r, eval=TRUE, echo=TRUE}
 # Teste de proporção da QUANTIDADE de pinguins para a espécie Adelie
-# h0 é igual a 0.33
-# h1 é diferente de 0.33
-p0 = 0.33
+# h0 é igual a 0.33333
+# h1 é diferente de 0.33333
+p0 = 0.33333
 alpha = 0.05
 n_dataset= length(penguins_db$species) # amostra total
 n = length(species_separadas_adelie$species) # tamanho da espécie adélie no dt
@@ -680,14 +680,14 @@ p_valor_adelie
 
 p_valor_adelie < alpha
 # Como o pvalor é maior alpha, aceitamos h0
-# Portanto, ao nível de 5%,os dados mostram que a proporção da população de pinguins da espécie Adelie é igual a 0.3(30%).
+# Portanto, ao nível de 5%,os dados mostram que a proporção da população de pinguins da espécie Adelie é igual a 0.3333(33%).
 ```
 
 ### Chinstrap
 ```{r, eval=TRUE, echo=TRUE}
 # Teste para proporção para a QUANTIDADE de pinguins da especie Chinstrap.
-# h0 é igual a 0.33
-# h1 é diferente de 0.33
+# h0 é igual a 0.33333
+# h1 é diferente de 0.33333
 n = length(species_separadas_chinstrap$species)
 p_chapeu_chinstrap = n/n_dataset
 
@@ -698,15 +698,15 @@ p_valor_chinstrap = pnorm(z_chinstrap_1)*2
 p_valor_chinstrap
 
 p_valor_chinstrap < alpha
-# Como pvalor é maior que alpha, aceitamos h0
-# Ao nível de 5%,os dados mostram que a proporção populacional de pinguins da espécie Chinstrap é igual a 0.3(30%).
+# Como  pvalor é maior que o alfra, rejeitamos h0
+# Ao nível de 5%,os dados mostram que a proporção populacional de pinguins da espécie Chinstrap diferente de 0.3333(33%).
 ```
 
 ### Gentoo
 ```{r, eval=TRUE, echo=TRUE}
 # Teste para proporção da QUANTIDADE de pinguins para a especie Gentoo
-# h0 é igual 0.33
-# h1 é diferente de 0.33
+# h0 é igual 0.3333
+# h1 é diferente de 0.3333
 n = length(species_separadas_gentoo$species)
 p_chapeu_gentoo = n/n_dataset
 
@@ -718,6 +718,6 @@ p_valor_gentoo
 
 p_valor_gentoo < alpha
 # Como pvalor é maior que alpha, aceitamos h0
-# Portanto, ao nível de 5%,os dados mostram que a proporção da populacional de pinguins da espécie Gentoo é igaul a 0.3(30%).
+# Portanto, ao nível de 5%,os dados mostram que a proporção da populacional de pinguins da espécie Gentoo é igual a 0.3333(33%).
 ```
 :::
