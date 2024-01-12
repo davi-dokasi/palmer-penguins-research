@@ -63,34 +63,6 @@ for (spec in species_unique) {
                                                penguins_db$sex == "female", ]))
 }
 
-species_resum <- penguins_db %>%
-  group_by(species) %>%
-  summarize(nrows_species = n(),
-    male_count = sum(ifelse(sex == "male", 1, 0), na.rm = TRUE),
-    female_count = sum(ifelse(sex == "female", 1, 0), na.rm = TRUE),
-    bill_length_min = min(bill_length_mm, na.rm = TRUE),
-    bill_length_max = max(bill_length_mm, na.rm = TRUE),
-    bill_depth_min = min(bill_depth_mm, na.rm = TRUE),
-    bill_depth_max = max(bill_depth_mm, na.rm = TRUE),
-    flipper_length_min = min(flipper_length_mm, na.rm = TRUE),
-    flipper_length_max = max(flipper_length_mm, na.rm = TRUE),
-    body_mass_min = min(body_mass_g, na.rm = TRUE),
-    body_mass_max = max(body_mass_g, na.rm = TRUE),
-  ) %>%
-  rename(
-    "Total de observações" = nrows_species,
-    "Quant. de machos" = male_count,
-    "Quant. de fêmeas" = female_count,
-    "Menor comprimento do bico (mm)" = bill_length_min,
-    "Maior comprimento do bico (mm)" = bill_length_max,
-    "Menor profundidade do bico (mm)" = bill_depth_min,
-    "Maior profundidade do bico (mm)" = bill_depth_max,
-    "Menor comprimento da nadadeira (mm)" = flipper_length_min,
-    "Maior comprimento da nadadeira (mm)" = flipper_length_max,
-    "Menor massa corporal (g)" = body_mass_min,
-    "Maior massa corporal (g)" = body_mass_max
-  )
-
 media_adelie <- colMeans(species_separadas_adelie[c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")], na.rm = TRUE)
 media_chinstrap <- colMeans(species_separadas_chinstrap[c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")], na.rm = TRUE)
 media_gentoo <- colMeans(species_separadas_gentoo[c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")], na.rm = TRUE)
@@ -154,7 +126,7 @@ knitr::kable(na.omit(penguins_db)[sample(nrow(na.omit(penguins_db)), 8), 2:ncol(
 :::
 :::
 
-## Sobre as espécies
+## Nossos Protagonistas
 ::: columns
 ::: {.column width="33%" .incremental}
 - Adélie 
