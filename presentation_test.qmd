@@ -13,7 +13,7 @@ format:
     theme: [default, dd.scss]
     
 ---
-```{r inicial, include=FALSE, warning=FALSE}
+```{r setting_vars, include=FALSE, warning=FALSE}
 
 #Bibliotecas Usadas:
 library(readr)
@@ -63,39 +63,37 @@ for (spec in species_unique) {
                                                penguins_db$sex == "female", ]))
 }
 
-species_separadas_adelie_sem_na <- na.omit(species_separadas_adelie)
-species_separadas_chinstrap_sem_na <- na.omit(species_separadas_chinstrap)
-species_separadas_gentoo_sem_na <- na.omit(species_separadas_gentoo)
+species_resum <- penguins_db %>%
+  group_by(species) %>%
+  summarize(nrows_species = n(),
+    male_count = sum(ifelse(sex == "male", 1, 0), na.rm = TRUE),
+    female_count = sum(ifelse(sex == "female", 1, 0), na.rm = TRUE),
+    bill_length_min = min(bill_length_mm, na.rm = TRUE),
+    bill_length_max = max(bill_length_mm, na.rm = TRUE),
+    bill_depth_min = min(bill_depth_mm, na.rm = TRUE),
+    bill_depth_max = max(bill_depth_mm, na.rm = TRUE),
+    flipper_length_min = min(flipper_length_mm, na.rm = TRUE),
+    flipper_length_max = max(flipper_length_mm, na.rm = TRUE),
+    body_mass_min = min(body_mass_g, na.rm = TRUE),
+    body_mass_max = max(body_mass_g, na.rm = TRUE),
+  ) %>%
+  rename(
+    "Total de observações" = nrows_species,
+    "Quant. de machos" = male_count,
+    "Quant. de fêmeas" = female_count,
+    "Menor comprimento do bico (mm)" = bill_length_min,
+    "Maior comprimento do bico (mm)" = bill_length_max,
+    "Menor profundidade do bico (mm)" = bill_depth_min,
+    "Maior profundidade do bico (mm)" = bill_depth_max,
+    "Menor comprimento da nadadeira (mm)" = flipper_length_min,
+    "Maior comprimento da nadadeira (mm)" = flipper_length_max,
+    "Menor massa corporal (g)" = body_mass_min,
+    "Maior massa corporal (g)" = body_mass_max
+  )
 
-media_adelie <- colMeans(species_separadas_adelie_sem_na[, c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")], na.rm = TRUE)
-media_chinstrap <- colMeans(species_separadas_chinstrap_sem_na[, c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")], na.rm = TRUE)
-media_gentoo <- colMeans(species_separadas_gentoo_sem_na[, c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")], na.rm = TRUE)
-
-names(media_adelie)[names(media_adelie) == "bill_length_mm"] <- "Médias"
-names(media_gentoo)[names(media_gentoo) == "bill_length_mm"] <- "Médias"
-names(media_chinstrap)[names(media_chinstrap) == "bill_length_mm"] <- "Médias"
-
-#####################
-media_adelie <- data.frame(
-  "bill_length_mm_mean" = media_adelie["Médias"],
-  "bill_depth_mm_mean" = media_adelie["bill_depth_mm"],
-  "flipper_length_mm_mean" = media_adelie["flipper_length_mm"],
-  "body_mass_g_mean" = media_adelie["body_mass_g"]
-)
-
-media_chinstrap <- data.frame(
-  "bill_length_mm_mean" =media_chinstrap["Médias"],
-  "bill_depth_mm_mean" = media_chinstrap["bill_depth_mm"],
-  "flipper_length_mm_mean" = media_chinstrap["flipper_length_mm"],
-  "body_mass_g_mean" = media_chinstrap["body_mass_g"]
-)
-
-media_gentoo <- data.frame(
-  "bill_length_mm_mean" = media_gentoo["Médias"],
-  "bill_depth_mm_mean" = media_gentoo["bill_depth_mm"],
-  "flipper_length_mm_mean" = media_gentoo["flipper_length_mm"],
-  "body_mass_g_mean" = media_gentoo["body_mass_g"]
-)
+media_adelie <- colMeans(species_separadas_adelie[c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")], na.rm = TRUE)
+media_chinstrap <- colMeans(species_separadas_chinstrap[c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")], na.rm = TRUE)
+media_gentoo <- colMeans(species_separadas_gentoo[c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")], na.rm = TRUE)
 
 ```
 # Introdução
@@ -124,7 +122,8 @@ media_gentoo <- data.frame(
 ::: columns
 ::: {.column width="55%"}
 
-- Coletados em Palmer Station, na Península Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Chinstrap e Gentoo. Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.
+- Coletados em Palmer Station, na Península Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Chinstrap e Gentoo. 
+- Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.
 :::
 
 ::: {.column width="45%"}
@@ -135,21 +134,22 @@ media_gentoo <- data.frame(
 ## Apresentando o dataset
 
 ::: columns
-::: {.column width="60%"}
+::: {.column width="62%"}
 Exemplo de uma pequena amostra aleatória do dataset:
 
-```{r}
+```{r penguinsdb_sample}
 
-knitr::kable(penguins_db[sample(nrow(penguins_db), 8), 2:ncol(penguins_db)],
+knitr::kable(na.omit(penguins_db)[sample(nrow(na.omit(penguins_db)), 8), 2:ncol(penguins_db)],
   col.names = penguins_db_header[-1],
   align = "ccrrrrcc"
 )  %>%
-    kable_styling(full_width = F, font_size = 17)
+  kable_styling(full_width = F, font_size = 17)
+   
 ```
 :::
-::: {.column width="40%"}
+::: {.column width="38%"}
 
-![](bg_img/var_explanation.png)
+![](bg_img/var_explanation.png){.absolute  width="380" height="auto"}
 
 :::
 :::
@@ -158,12 +158,12 @@ knitr::kable(penguins_db[sample(nrow(penguins_db), 8), 2:ncol(penguins_db)],
 ::: columns
 ::: {.column width="33%" .incremental}
 - Adélie 
-
-- ![](bg_img/adelie.jpg){width="200" height="200"}
+ ![](bg_img/adelie_1.jpeg){width="290" height="auto"}
 
 ```{r attr.output='.incremental'}
 
-knitr::kable(t(media_adelie)) %>%
+knitr::kable(media_adelie, 
+      col.names = "Médias") %>%
   kable_styling(full_width = F, position = "center", font_size = 18)
 
 ```
@@ -171,54 +171,43 @@ knitr::kable(t(media_adelie)) %>%
 :::
 ::: {.column width="33%" .incremental}
 - Chinstrap
-
-- ![](bg_img/chinstrap.jpeg){width="200" height="200"}
+ ![](bg_img/chinstrap.jpeg){width="290" height="auto"}
 
 ```{r attr.output='.incremental'}
-knitr::kable(t(media_chinstrap)) %>%
+
+knitr::kable(media_chinstrap, 
+      col.names = "Médias") %>%
   kable_styling(full_width = F, position = "center", font_size = 18)
 
 ```
 :::
 ::: {.column width="33%" .incremental}
 - Gentoo
-
-- ![](bg_img/gentoo.jpeg){width="200" height="200"}
+ ![](bg_img/gentoo.jpeg){width="290" height="auto"}
 
 ```{r attr.output='.incremental'}
-knitr::kable(t(media_gentoo)) %>%
+
+knitr::kable(media_gentoo, 
+      col.names = "Médias") %>%
   kable_styling(full_width = F, position = "center", font_size = 18)
 
 ```
 :::
 :::
 
-## Visão Geral
+## Sobre as espécies
 
-::: columns
+Uma visão geral sobre o dataset escolhido: 
 
-Iniciamos a análise com uma visão geral sobre o dataset escolhido: 
+::: {.panel-tabset}
 
-::: {.column width="50%"}
+### Visão Geográfica
 
-![](bg_img/var_explanation.png)
-:::
+![](bg_img/islands.jpeg){width="100%"height="auto"}
 
-::: {.column width="50%"}
-```{r Análise Exploratória,include=FALSE, warning=FALSE}
-vars <- c(
-  "Total de observações",
-  "Quant. de machos",
-  "Quant. de fêmeas",
-  "Menor comprimento do bico",
-  "Maior comprimento do bico",
-  "Menor profundidade do bico",
-  "Maior profundidade do bico",
-  "Menor comprimento da nadadeira",
-  "Maior comprimento da nadadeira",
-  "Menor massa corporal",
-  "Maior massa corporal"
-)
+### Algumas observações
+
+```{r species_resum_min_max}
 
 species_resum <- penguins_db %>%
   group_by(species) %>%
@@ -247,14 +236,11 @@ species_resum <- penguins_db %>%
     "Menor massa corporal (g)" = body_mass_min,
     "Maior massa corporal (g)" = body_mass_max
   )
-```
 
-```{r}
 knitr::kable(t(species_resum[, 2:ncol(species_resum)]),
              col.names = c(species_resum$species)) %>%
   kable_styling(font_size = 17.5)
 ```
-:::
 :::
 
 # Pesquisas
