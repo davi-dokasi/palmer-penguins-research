@@ -13,7 +13,7 @@ format:
     theme: [default, dd.scss]
     
 ---
-```{r inicial, include=FALSE, warning=FALSE}
+```{r setting_vars, include=FALSE, warning=FALSE}
 
 #Bibliotecas Usadas:
 library(readr)
@@ -63,39 +63,9 @@ for (spec in species_unique) {
                                                penguins_db$sex == "female", ]))
 }
 
-species_separadas_adelie_sem_na <- na.omit(species_separadas_adelie)
-species_separadas_chinstrap_sem_na <- na.omit(species_separadas_chinstrap)
-species_separadas_gentoo_sem_na <- na.omit(species_separadas_gentoo)
-
-media_adelie <- colMeans(species_separadas_adelie_sem_na[, c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")], na.rm = TRUE)
-media_chinstrap <- colMeans(species_separadas_chinstrap_sem_na[, c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")], na.rm = TRUE)
-media_gentoo <- colMeans(species_separadas_gentoo_sem_na[, c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")], na.rm = TRUE)
-
-names(media_adelie)[names(media_adelie) == "bill_length_mm"] <- "Médias"
-names(media_gentoo)[names(media_gentoo) == "bill_length_mm"] <- "Médias"
-names(media_chinstrap)[names(media_chinstrap) == "bill_length_mm"] <- "Médias"
-
-#####################
-media_adelie <- data.frame(
-  "bill_length_mm_mean" = media_adelie["Médias"],
-  "bill_depth_mm_mean" = media_adelie["bill_depth_mm"],
-  "flipper_length_mm_mean" = media_adelie["flipper_length_mm"],
-  "body_mass_g_mean" = media_adelie["body_mass_g"]
-)
-
-media_chinstrap <- data.frame(
-  "bill_length_mm_mean" =media_chinstrap["Médias"],
-  "bill_depth_mm_mean" = media_chinstrap["bill_depth_mm"],
-  "flipper_length_mm_mean" = media_chinstrap["flipper_length_mm"],
-  "body_mass_g_mean" = media_chinstrap["body_mass_g"]
-)
-
-media_gentoo <- data.frame(
-  "bill_length_mm_mean" = media_gentoo["Médias"],
-  "bill_depth_mm_mean" = media_gentoo["bill_depth_mm"],
-  "flipper_length_mm_mean" = media_gentoo["flipper_length_mm"],
-  "body_mass_g_mean" = media_gentoo["body_mass_g"]
-)
+media_adelie <- colMeans(species_separadas_adelie[c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")], na.rm = TRUE)
+media_chinstrap <- colMeans(species_separadas_chinstrap[c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")], na.rm = TRUE)
+media_gentoo <- colMeans(species_separadas_gentoo[c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")], na.rm = TRUE)
 
 ```
 # Introdução
@@ -124,7 +94,8 @@ media_gentoo <- data.frame(
 ::: columns
 ::: {.column width="55%"}
 
-- Coletados em Palmer Station, na Península Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Chinstrap e Gentoo. Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.
+- Coletados em Palmer Station, na Península Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Chinstrap e Gentoo. 
+- Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.
 :::
 
 ::: {.column width="45%"}
@@ -135,35 +106,36 @@ media_gentoo <- data.frame(
 ## Apresentando o dataset
 
 ::: columns
-::: {.column width="60%"}
+::: {.column width="62%"}
 Exemplo de uma pequena amostra aleatória do dataset:
 
-```{r}
+```{r penguinsdb_sample}
 
-knitr::kable(penguins_db[sample(nrow(penguins_db), 8), 2:ncol(penguins_db)],
+knitr::kable(na.omit(penguins_db)[sample(nrow(na.omit(penguins_db)), 8), 2:ncol(penguins_db)],
   col.names = penguins_db_header[-1],
   align = "ccrrrrcc"
 )  %>%
-    kable_styling(full_width = F, font_size = 17)
+  kable_styling(full_width = F, font_size = 17)
+   
 ```
 :::
-::: {.column width="40%"}
+::: {.column width="38%"}
 
-![](bg_img/var_explanation.png)
+![](bg_img/var_explanation.png){.absolute  width="380" height="auto"}
 
 :::
 :::
 
-## Sobre as espécies
+## Nossos Protagonistas
 ::: columns
 ::: {.column width="33%" .incremental}
 - Adélie 
-
-- ![](bg_img/adelie.jpg){width="200" height="200"}
+ ![](bg_img/adelie_1.jpeg){width="290" height="auto"}
 
 ```{r attr.output='.incremental'}
 
-knitr::kable(t(media_adelie)) %>%
+knitr::kable(media_adelie, 
+      col.names = "Médias") %>%
   kable_styling(full_width = F, position = "center", font_size = 18)
 
 ```
@@ -171,54 +143,43 @@ knitr::kable(t(media_adelie)) %>%
 :::
 ::: {.column width="33%" .incremental}
 - Chinstrap
-
-- ![](bg_img/chinstrap.jpeg){width="200" height="200"}
+ ![](bg_img/chinstrap.jpeg){width="290" height="auto"}
 
 ```{r attr.output='.incremental'}
-knitr::kable(t(media_chinstrap)) %>%
+
+knitr::kable(media_chinstrap, 
+      col.names = "Médias") %>%
   kable_styling(full_width = F, position = "center", font_size = 18)
 
 ```
 :::
 ::: {.column width="33%" .incremental}
 - Gentoo
-
-- ![](bg_img/gentoo.jpeg){width="200" height="200"}
+ ![](bg_img/gentoo.jpeg){width="290" height="auto"}
 
 ```{r attr.output='.incremental'}
-knitr::kable(t(media_gentoo)) %>%
+
+knitr::kable(media_gentoo, 
+      col.names = "Médias") %>%
   kable_styling(full_width = F, position = "center", font_size = 18)
 
 ```
 :::
 :::
 
-## Visão Geral
+## Sobre as espécies
 
-::: columns
+Uma visão geral sobre o dataset escolhido: 
 
-Iniciamos a análise com uma visão geral sobre o dataset escolhido: 
+::: {.panel-tabset}
 
-::: {.column width="50%"}
+### Visão Geográfica
 
-![](bg_img/var_explanation.png)
-:::
+![](bg_img/islands.jpeg){width="100%"height="auto"}
 
-::: {.column width="50%"}
-```{r Análise Exploratória,include=FALSE, warning=FALSE}
-vars <- c(
-  "Total de observações",
-  "Quant. de machos",
-  "Quant. de fêmeas",
-  "Menor comprimento do bico",
-  "Maior comprimento do bico",
-  "Menor profundidade do bico",
-  "Maior profundidade do bico",
-  "Menor comprimento da nadadeira",
-  "Maior comprimento da nadadeira",
-  "Menor massa corporal",
-  "Maior massa corporal"
-)
+### Algumas observações
+
+```{r species_resum_min_max}
 
 species_resum <- penguins_db %>%
   group_by(species) %>%
@@ -247,14 +208,11 @@ species_resum <- penguins_db %>%
     "Menor massa corporal (g)" = body_mass_min,
     "Maior massa corporal (g)" = body_mass_max
   )
-```
 
-```{r}
 knitr::kable(t(species_resum[, 2:ncol(species_resum)]),
              col.names = c(species_resum$species)) %>%
   kable_styling(font_size = 17.5)
 ```
-:::
 :::
 
 # Pesquisas
@@ -372,7 +330,6 @@ lim_sup_boot  <- qnorm(p = 0.025,
 # lim_inf <- media_adelie - z * sd_adelie/sqrt(n)
 # lim_sup <- media_adelie + z * sd_adelie/sqrt(n)
 
-
 ```
 
 Um exemplo de como o bootstrap funciona:
@@ -383,25 +340,24 @@ Um exemplo de como o bootstrap funciona:
 ::: {.panel-tabset}
 
 ### Intervalo Bootstraping
-Os gráficos abaixo são, respectivamente, o histograma das médias das amostras geradas pelo Bootstrapping e a curva Teórica:
 
 ```{r Intervalo de Confiança,warning=FALSE}
 # Criando os gráficos
 #Histograma Do BootStrapinng
 
-g1 <- ggplot(data = data, aes(x = x)) +
-  geom_histogram(aes(y = after_stat(density)),
-  fill = "#FC9E21",
-  binwidth = 0.1,
-  color = "black") +
-  theme_minimal() +
-  labs(title = "Histograma das médias geradas pelo BootStraping",
-       subtitle = "Espécie Adelie considerando o comprimento da nadadeira",
-       x = "Comprimento da Nadadeira (mm)",
-       y = "Densidade",
-       fill = "Distribuição")
+# ggplot(data = data, aes(x = x)) +
+#   geom_histogram(aes(y = after_stat(density)),
+#   fill = "#FC9E21",
+#   binwidth = 0.1,
+#   color = "black") +
+#   theme_minimal() +
+#   labs(title = "Histograma das médias geradas pelo BootStraping",
+#        subtitle = "Espécie Adelie considerando o comprimento da nadadeira",
+#        x = "Comprimento da Nadadeira (mm)",
+#        y = "Densidade",
+#        fill = "Distribuição")
 
-g2 <- ggplot(data = data, aes(x = x)) +
+ggplot(data = data, aes(x = x)) +
   geom_histogram(aes(y = after_stat(density)),
   fill = "#FC9E21",
   binwidth = 0.1,
@@ -417,9 +373,6 @@ g2 <- ggplot(data = data, aes(x = x)) +
        x = "Comprimento da Nadadeira (mm)",
        y = "Densidade",
        fill = "Distribuição")
-
-g1 / g2
-
 
 ```
 
@@ -448,17 +401,17 @@ ggplot(data = data, aes(x = x)) +
                 xlim = c(lim_sup, 192)) +
   theme_minimal() +
   labs(title = "Curva Normal das Médias Geradas pelo BootStraping considerando IC",
-       subtitle = "Para Espécie Adélie Considerando a Variável Comprimento do Bico",
+       subtitle = "Para espécie Adélie considerando o comprimento da nadadeira",
        x = "Comprimento da Nadadeira (mm)",
        y = "Densidade",
        fill = "Distribuição") +
-  geom_text(x = 191.5, y = 0.7, label = "Limite Superior: 190.9 mm ", alpha = 0.02) +
-  geom_text(x = 191.458, y = 0.65, label = "Limite Inferior: 188.9 mm ", alpha = 0.02)
+  geom_text(x = 191.5, y = 0.7, label = "Limite Superior: 190.9 mm ", alpha = 0.02, size = 6) +
+  geom_text(x = 191.458, y = 0.62, label = "Limite Inferior: 188.9 mm ", alpha = 0.02, size = 6)
 
 ```
 
 ### Comparação
-Verifica-se que os intervalos de confiança com fórmula e com bootstrap são os mesmos:
+Verifica-se que os intervalos de confiança com fórmula 'tradicional' e com Bootstrap são praticamente os mesmos:
 
 ```{r Comparação, echo = FALSE, warning=FALSE}
 
@@ -692,5 +645,79 @@ resultados <- data.frame(
 
 knitr::kable(resultados, caption = "Limites Inferiores e Superiores para as espécies Chinstrap e Gentoo")
 
+```
+:::
+
+
+## Teste de Hipótese!{.incremental}
+
+ - Objetivo do Teste: Investigar se a proporção de pinguins das espécies Adélie, Chinstrap e Gentoo no conjunto de dados Palmer Penguins difere significativamente de uma distribuição equitativa, com uma proporção hipotética de 0.33 e alpha 0.5 para cada espécie.
+ 
+ - Contexto: Exploramos as proporções de cada espécie de pinguim para entender se a distribuição observada no conjunto de dados diverge da expectativa equitativa.
+ 
+ - Método: Utilizando testes de proporção, analisaremos se as quantidades observadas de Adélie, Chinstrap e Gentoo são estatisticamente diferentes das proporções esperadas.
+ 
+## Teste de Hipótese
+::: {.panel-tabset}
+
+### Adélie
+```{r, eval=TRUE, echo=TRUE}
+# Teste de proporção da QUANTIDADE de pinguins para a espécie Adelie
+# h0 é igual a 0.33
+# h1 é diferente de 0.33
+p0 = 0.33
+alpha = 0.05
+n_dataset= length(penguins_db$species) # amostra total
+n = length(species_separadas_adelie$species) # tamanho da espécie adélie no dt
+
+p_chapeu_adelie = n/n_dataset # proporção adelie/amostra total
+
+z_adelie_1 = (p_chapeu_adelie-p0)/sqrt(p0*(1-p0)/n)
+z_adelie_1
+
+p_valor_adelie = pnorm(z_adelie_1)*2
+p_valor_adelie
+
+p_valor_adelie < alpha
+# Como o pvalor é maior alpha, aceitamos h0
+# Portanto, ao nível de 5%,os dados mostram que a proporção da população de pinguins da espécie Adelie é igual a 0.3(30%).
+```
+
+### Chinstrap
+```{r, eval=TRUE, echo=TRUE}
+# Teste para proporção para a QUANTIDADE de pinguins da especie Chinstrap.
+# h0 é igual a 0.33
+# h1 é diferente de 0.33
+n = length(species_separadas_chinstrap$species)
+p_chapeu_chinstrap = n/n_dataset
+
+z_chinstrap_1 = (p_chapeu_chinstrap-p0)/sqrt(p0*(1-p0)/n)
+z_chinstrap_1
+
+p_valor_chinstrap = pnorm(z_chinstrap_1)*2
+p_valor_chinstrap
+
+p_valor_chinstrap < alpha
+# Como pvalor é maior que alpha, aceitamos h0
+# Ao nível de 5%,os dados mostram que a proporção populacional de pinguins da espécie Chinstrap é igual a 0.3(30%).
+```
+
+### Gentoo
+```{r, eval=TRUE, echo=TRUE}
+# Teste para proporção da QUANTIDADE de pinguins para a especie Gentoo
+# h0 é igual 0.33
+# h1 é diferente de 0.33
+n = length(species_separadas_gentoo$species)
+p_chapeu_gentoo = n/n_dataset
+
+z_gentto_1 = (p_chapeu_gentoo-p0)/sqrt(p0*(1-p0)/n)
+z_gentto_1
+
+p_valor_gentoo = pnorm(z_gentto_1)*2
+p_valor_gentoo
+
+p_valor_gentoo < alpha
+# Como pvalor é maior que alpha, aceitamos h0
+# Portanto, ao nível de 5%,os dados mostram que a proporção da populacional de pinguins da espécie Gentoo é igaul a 0.3(30%).
 ```
 :::

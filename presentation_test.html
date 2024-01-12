@@ -28,6 +28,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="presentation_test_files/libs/revealjs/dist/theme/quarto.css">
   <link href="presentation_test_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -359,7 +424,8 @@
 <div class="columns">
 <div class="column" style="width:55%;">
 <ul>
-<li>Coletados em Palmer Station, na Península Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Chinstrap e Gentoo. Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.</li>
+<li>Coletados em Palmer Station, na Península Antártica, esses dados oferecem insights valiosos sobre três espécies de pinguins: Adélie, Chinstrap e Gentoo.</li>
+<li>Cada linha neste conjunto de dados é mais do que um simples registro; é uma história de sobrevivência, reprodução e evolução em um dos ambientes mais extremos do planeta.</li>
 </ul>
 </div><div class="column" style="width:45%;">
 <p><img data-src="bg_img/madagascar.png" class="absolute" style="width: 450px; height: 300px; "></p>
@@ -369,7 +435,7 @@
 <section id="apresentando-o-dataset" class="slide level2">
 <h2>Apresentando o dataset</h2>
 <div class="columns">
-<div class="column" style="width:60%;">
+<div class="column" style="width:62%;">
 <p>Exemplo de uma pequena amostra aleatória do dataset:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -388,46 +454,6 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">Chinstrap</td>
-<td style="text-align: center;">Dream</td>
-<td style="text-align: right;">42.5</td>
-<td style="text-align: right;">17.3</td>
-<td style="text-align: right;">187</td>
-<td style="text-align: right;">3350</td>
-<td style="text-align: center;">female</td>
-<td style="text-align: center;">2009</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Adelie</td>
-<td style="text-align: center;">Dream</td>
-<td style="text-align: right;">40.3</td>
-<td style="text-align: right;">18.5</td>
-<td style="text-align: right;">196</td>
-<td style="text-align: right;">4350</td>
-<td style="text-align: center;">male</td>
-<td style="text-align: center;">2008</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Adelie</td>
-<td style="text-align: center;">Torgersen</td>
-<td style="text-align: right;">39.0</td>
-<td style="text-align: right;">17.1</td>
-<td style="text-align: right;">191</td>
-<td style="text-align: right;">3050</td>
-<td style="text-align: center;">female</td>
-<td style="text-align: center;">2009</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Gentoo</td>
-<td style="text-align: center;">Biscoe</td>
-<td style="text-align: right;">46.5</td>
-<td style="text-align: right;">13.5</td>
-<td style="text-align: right;">210</td>
-<td style="text-align: right;">4550</td>
-<td style="text-align: center;">female</td>
-<td style="text-align: center;">2007</td>
-</tr>
-<tr class="odd">
 <td style="text-align: center;">Adelie</td>
 <td style="text-align: center;">Torgersen</td>
 <td style="text-align: right;">46.0</td>
@@ -438,32 +464,72 @@
 <td style="text-align: center;">2007</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Chinstrap</td>
-<td style="text-align: center;">Dream</td>
-<td style="text-align: right;">46.4</td>
-<td style="text-align: right;">18.6</td>
-<td style="text-align: right;">190</td>
-<td style="text-align: right;">3450</td>
+<td style="text-align: center;">Gentoo</td>
+<td style="text-align: center;">Biscoe</td>
+<td style="text-align: right;">43.6</td>
+<td style="text-align: right;">13.9</td>
+<td style="text-align: right;">217</td>
+<td style="text-align: right;">4900</td>
 <td style="text-align: center;">female</td>
-<td style="text-align: center;">2007</td>
+<td style="text-align: center;">2008</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Adelie</td>
-<td style="text-align: center;">Torgersen</td>
-<td style="text-align: right;">41.8</td>
-<td style="text-align: right;">19.4</td>
-<td style="text-align: right;">198</td>
-<td style="text-align: right;">4450</td>
+<td style="text-align: center;">Biscoe</td>
+<td style="text-align: right;">40.6</td>
+<td style="text-align: right;">18.8</td>
+<td style="text-align: right;">193</td>
+<td style="text-align: right;">3800</td>
 <td style="text-align: center;">male</td>
 <td style="text-align: center;">2008</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Gentoo</td>
 <td style="text-align: center;">Biscoe</td>
-<td style="text-align: right;">45.1</td>
-<td style="text-align: right;">14.4</td>
-<td style="text-align: right;">210</td>
-<td style="text-align: right;">4400</td>
+<td style="text-align: right;">43.3</td>
+<td style="text-align: right;">14.0</td>
+<td style="text-align: right;">208</td>
+<td style="text-align: right;">4575</td>
+<td style="text-align: center;">female</td>
+<td style="text-align: center;">2009</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Adelie</td>
+<td style="text-align: center;">Biscoe</td>
+<td style="text-align: right;">36.4</td>
+<td style="text-align: right;">17.1</td>
+<td style="text-align: right;">184</td>
+<td style="text-align: right;">2850</td>
+<td style="text-align: center;">female</td>
+<td style="text-align: center;">2008</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Adelie</td>
+<td style="text-align: center;">Biscoe</td>
+<td style="text-align: right;">43.2</td>
+<td style="text-align: right;">19.0</td>
+<td style="text-align: right;">197</td>
+<td style="text-align: right;">4775</td>
+<td style="text-align: center;">male</td>
+<td style="text-align: center;">2009</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Adelie</td>
+<td style="text-align: center;">Dream</td>
+<td style="text-align: right;">37.3</td>
+<td style="text-align: right;">16.8</td>
+<td style="text-align: right;">192</td>
+<td style="text-align: right;">3000</td>
+<td style="text-align: center;">female</td>
+<td style="text-align: center;">2009</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Gentoo</td>
+<td style="text-align: center;">Biscoe</td>
+<td style="text-align: right;">43.5</td>
+<td style="text-align: right;">14.2</td>
+<td style="text-align: right;">220</td>
+<td style="text-align: right;">4700</td>
 <td style="text-align: center;">female</td>
 <td style="text-align: center;">2008</td>
 </tr>
@@ -473,18 +539,17 @@
 
 </div>
 </div>
-</div><div class="column" style="width:40%;">
-<p><img data-src="bg_img/var_explanation.png"></p>
+</div><div class="column" style="width:38%;">
+<p><img data-src="bg_img/var_explanation.png" class="absolute" style="width: 380px; height: auto; "></p>
 </div>
 </div>
 </section>
-<section id="sobre-as-espécies" class="slide level2">
-<h2>Sobre as espécies</h2>
+<section id="nossos-protagonistas" class="slide level2">
+<h2>Nossos Protagonistas</h2>
 <div class="columns">
 <div class="column" style="width:33%;">
 <ul>
-<li class="fragment"><p>Adélie</p></li>
-<li class="fragment"><p><img data-src="bg_img/adelie.jpg" width="200" height="200"></p></li>
+<li class="fragment">Adélie <img data-src="bg_img/adelie_1.jpeg" width="290"></li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
@@ -497,20 +562,20 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">bill_length_mm_mean</td>
-<td style="text-align: right;">38.82397</td>
+<td style="text-align: left;">bill_length_mm</td>
+<td style="text-align: right;">38.79139</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">bill_depth_mm_mean</td>
-<td style="text-align: right;">18.34726</td>
+<td style="text-align: left;">bill_depth_mm</td>
+<td style="text-align: right;">18.34636</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">flipper_length_mm_mean</td>
-<td style="text-align: right;">190.10274</td>
+<td style="text-align: left;">flipper_length_mm</td>
+<td style="text-align: right;">189.95364</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">body_mass_g_mean</td>
-<td style="text-align: right;">3706.16438</td>
+<td style="text-align: left;">body_mass_g</td>
+<td style="text-align: right;">3700.66225</td>
 </tr>
 </tbody>
 </table>
@@ -520,8 +585,7 @@
 </div>
 </div><div class="column" style="width:33%;">
 <ul>
-<li class="fragment"><p>Chinstrap</p></li>
-<li class="fragment"><p><img data-src="bg_img/chinstrap.jpeg" width="200" height="200"></p></li>
+<li class="fragment">Chinstrap <img data-src="bg_img/chinstrap.jpeg" width="290"></li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
@@ -534,19 +598,19 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">bill_length_mm_mean</td>
+<td style="text-align: left;">bill_length_mm</td>
 <td style="text-align: right;">48.83382</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">bill_depth_mm_mean</td>
+<td style="text-align: left;">bill_depth_mm</td>
 <td style="text-align: right;">18.42059</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">flipper_length_mm_mean</td>
+<td style="text-align: left;">flipper_length_mm</td>
 <td style="text-align: right;">195.82353</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">body_mass_g_mean</td>
+<td style="text-align: left;">body_mass_g</td>
 <td style="text-align: right;">3733.08824</td>
 </tr>
 </tbody>
@@ -557,8 +621,7 @@
 </div>
 </div><div class="column" style="width:33%;">
 <ul>
-<li class="fragment"><p>Gentoo</p></li>
-<li class="fragment"><p><img data-src="bg_img/gentoo.jpeg" width="200" height="200"></p></li>
+<li class="fragment">Gentoo <img data-src="bg_img/gentoo.jpeg" width="290"></li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
@@ -571,20 +634,20 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">bill_length_mm_mean</td>
-<td style="text-align: right;">47.56807</td>
+<td style="text-align: left;">bill_length_mm</td>
+<td style="text-align: right;">47.50488</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">bill_depth_mm_mean</td>
-<td style="text-align: right;">14.99664</td>
+<td style="text-align: left;">bill_depth_mm</td>
+<td style="text-align: right;">14.98211</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">flipper_length_mm_mean</td>
-<td style="text-align: right;">217.23529</td>
+<td style="text-align: left;">flipper_length_mm</td>
+<td style="text-align: right;">217.18699</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">body_mass_g_mean</td>
-<td style="text-align: right;">5092.43697</td>
+<td style="text-align: left;">body_mass_g</td>
+<td style="text-align: right;">5076.01626</td>
 </tr>
 </tbody>
 </table>
@@ -595,12 +658,16 @@
 </div>
 </div>
 </section>
-<section id="visão-geral" class="slide level2">
-<h2>Visão Geral</h2>
-<div class="columns">
-<p>Iniciamos a análise com uma visão geral sobre o dataset escolhido:</p><div class="column" style="width:50%;">
-<p><img data-src="bg_img/var_explanation.png"></p>
-</div><div class="column" style="width:50%;">
+<section id="sobre-as-espécies" class="slide level2">
+<h2>Sobre as espécies</h2>
+<p>Uma visão geral sobre o dataset escolhido:</p>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Visão Geográfica</a></li><li><a href="#tabset-1-2">Algumas observações</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<p><img data-src="bg_img/islands.jpeg" style="width:100.0%"></p>
+</div>
+<div id="tabset-1-2">
 <div class="cell">
 <div class="cell-output-display">
 <table class="table" data-quarto-postprocess="true" style="font-size: 17.5px; margin-left: auto; margin-right: auto;">
@@ -687,6 +754,7 @@
 </div>
 </div>
 </div>
+</div>
 </section></section>
 <section>
 <section id="pesquisas" class="title-slide slide level1 center">
@@ -697,9 +765,9 @@
 <h2>Estudo Adelie</h2>
 <p>Com o objetivo de cálcular o intervalo de confiança para a espécie Adelie, criamos um data base com apenas as observações da espécie de interesse nele, abaixo está o resumo:</p>
 <div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">As primeiras 6 observações:</a></li><li><a href="#tabset-1-2">Intervalo de confiança:</a></li></ul>
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">As primeiras 6 observações:</a></li><li><a href="#tabset-2-2">Intervalo de confiança:</a></li></ul>
 <div class="tab-content">
-<div id="tabset-1-1">
+<div id="tabset-2-1">
 <div class="cell">
 <div class="cell-output-display">
 <table class="table" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
@@ -783,7 +851,7 @@
 </div>
 </div>
 </div>
-<div id="tabset-1-2">
+<div id="tabset-2-2">
 <p><img data-src="flipper_lenght_adelie.png" width="1000" height="500"></p>
 <p>limite inferior -&gt; 188.914, limite superior -&gt; 190.9932</p>
 <div class="footer">
@@ -801,17 +869,16 @@
 <section id="na-prática" class="slide level2">
 <h2>Na prática</h2>
 <div class="panel-tabset">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Intervalo Bootstraping</a></li><li><a href="#tabset-2-2">IC - Curva Teórica</a></li><li><a href="#tabset-2-3">Comparação</a></li></ul>
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Intervalo Bootstraping</a></li><li><a href="#tabset-3-2">IC - Curva Teórica</a></li><li><a href="#tabset-3-3">Comparação</a></li></ul>
 <div class="tab-content">
-<div id="tabset-2-1">
-<p>Os gráficos abaixo são, respectivamente, o histograma das médias das amostras geradas pelo Bootstrapping e a curva Teórica:</p>
+<div id="tabset-3-1">
 <div class="cell">
 <div class="cell-output-display">
 <p><img data-src="presentation_test_files/figure-revealjs/Intervalo%20de%20Confiança-1.png" width="960"></p>
 </div>
 </div>
 </div>
-<div id="tabset-2-2">
+<div id="tabset-3-2">
 <p>Verifica-se a Curva Normal Teórica com o Intervalo de confiança calculado na curva teórica!</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -819,8 +886,8 @@
 </div>
 </div>
 </div>
-<div id="tabset-2-3">
-<p>Verifica-se que os intervalos de confiança com fórmula e com bootstrap são os mesmos:</p>
+<div id="tabset-3-3">
+<p>Verifica-se que os intervalos de confiança com fórmula ‘tradicional’ e com Bootstrap são praticamente os mesmos:</p>
 <div class="cell">
 <div class="cell-output-display">
 <table data-quarto-postprocess="true">
@@ -855,16 +922,16 @@
 <section id="todas-as-espécies" class="slide level2">
 <h2>Todas as espécies</h2>
 <div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Ánalise Conjunta</a></li></ul>
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Ánalise Conjunta</a></li><li><a href="#tabset-4-2">Comparação</a></li></ul>
 <div class="tab-content">
-<div id="tabset-3-1">
+<div id="tabset-4-1">
 <div class="cell">
 <div class="cell-output-display">
 <p><img data-src="presentation_test_files/figure-revealjs/Todas-1.png" width="960"></p>
 </div>
 </div>
-<section id="comparação-1" class="slide level2">
-<h2>Comparação</h2>
+</div>
+<div id="tabset-4-2">
 <div class="cell">
 <div class="cell-output-display">
 <table data-quarto-postprocess="true">
@@ -898,12 +965,109 @@
 
 </div>
 </div>
+</div>
+</div>
+</div>
 </section>
+<section id="teste-de-hipótese" class="slide level2 incremental">
+<h2>Teste de Hipótese!</h2>
+<ul>
+<li><p>Objetivo do Teste: Investigar se a proporção de pinguins das espécies Adélie, Chinstrap e Gentoo no conjunto de dados Palmer Penguins difere significativamente de uma distribuição equitativa, com uma proporção hipotética de 0.33 e alpha 0.5 para cada espécie.</p></li>
+<li><p>Contexto: Exploramos as proporções de cada espécie de pinguim para entender se a distribuição observada no conjunto de dados diverge da expectativa equitativa.</p></li>
+<li><p>Método: Utilizando testes de proporção, analisaremos se as quantidades observadas de Adélie, Chinstrap e Gentoo são estatisticamente diferentes das proporções esperadas.</p></li>
+</ul>
+</section>
+<section id="teste-de-hipótese-1" class="slide level2">
+<h2>Teste de Hipótese</h2>
+<div class="panel-tabset">
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Adélie</a></li><li><a href="#tabset-5-2">Chinstrap</a></li><li><a href="#tabset-5-3">Gentoo</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Teste de proporção da QUANTIDADE de pinguins para a espécie Adelie</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># h0 é igual a 0.33</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># h1 é diferente de 0.33</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>p0 <span class="ot">=</span> <span class="fl">0.33</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>alpha <span class="ot">=</span> <span class="fl">0.05</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>n_dataset<span class="ot">=</span> <span class="fu">length</span>(penguins_db<span class="sc">$</span>species) <span class="co"># amostra total</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>n <span class="ot">=</span> <span class="fu">length</span>(species_separadas_adelie<span class="sc">$</span>species) <span class="co"># tamanho da espécie adélie no dt</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a>p_chapeu_adelie <span class="ot">=</span> n<span class="sc">/</span>n_dataset <span class="co"># proporção adelie/amostra total</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a>z_adelie_1 <span class="ot">=</span> (p_chapeu_adelie<span class="sc">-</span>p0)<span class="sc">/</span><span class="fu">sqrt</span>(p0<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p0)<span class="sc">/</span>n)</span>
+<span id="cb1-12"><a href="#cb1-12"></a>z_adelie_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.932946</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>p_valor_adelie <span class="ot">=</span> <span class="fu">pnorm</span>(z_adelie_1)<span class="sc">*</span><span class="dv">2</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>p_valor_adelie</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.996642</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>p_valor_adelie <span class="sc">&lt;</span> alpha</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Como o pvalor é maior alpha, aceitamos h0</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># Portanto, ao nível de 5%,os dados mostram que a proporção da população de pinguins da espécie Adelie é igual a 0.3(30%).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-5-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Teste para proporção para a QUANTIDADE de pinguins da especie Chinstrap.</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co"># h0 é igual a 0.33</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co"># h1 é diferente de 0.33</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>n <span class="ot">=</span> <span class="fu">length</span>(species_separadas_chinstrap<span class="sc">$</span>species)</span>
+<span id="cb8-5"><a href="#cb8-5"></a>p_chapeu_chinstrap <span class="ot">=</span> n<span class="sc">/</span>n_dataset</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a>z_chinstrap_1 <span class="ot">=</span> (p_chapeu_chinstrap<span class="sc">-</span>p0)<span class="sc">/</span><span class="fu">sqrt</span>(p0<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p0)<span class="sc">/</span>n)</span>
+<span id="cb8-8"><a href="#cb8-8"></a>z_chinstrap_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2.320619</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>p_valor_chinstrap <span class="ot">=</span> <span class="fu">pnorm</span>(z_chinstrap_1)<span class="sc">*</span><span class="dv">2</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>p_valor_chinstrap</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0203074</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>p_valor_chinstrap <span class="sc">&lt;</span> alpha</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Como pvalor é maior que alpha, aceitamos h0</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="co"># Ao nível de 5%,os dados mostram que a proporção populacional de pinguins da espécie Chinstrap é igual a 0.3(30%).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-5-3">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Teste para proporção da QUANTIDADE de pinguins para a especie Gentoo</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co"># h0 é igual 0.33</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="co"># h1 é diferente de 0.33</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>n <span class="ot">=</span> <span class="fu">length</span>(species_separadas_gentoo<span class="sc">$</span>species)</span>
+<span id="cb15-5"><a href="#cb15-5"></a>p_chapeu_gentoo <span class="ot">=</span> n<span class="sc">/</span>n_dataset</span>
+<span id="cb15-6"><a href="#cb15-6"></a></span>
+<span id="cb15-7"><a href="#cb15-7"></a>z_gentto_1 <span class="ot">=</span> (p_chapeu_gentoo<span class="sc">-</span>p0)<span class="sc">/</span><span class="fu">sqrt</span>(p0<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p0)<span class="sc">/</span>n)</span>
+<span id="cb15-8"><a href="#cb15-8"></a>z_gentto_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7214717</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>p_valor_gentoo <span class="ot">=</span> <span class="fu">pnorm</span>(z_gentto_1)<span class="sc">*</span><span class="dv">2</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>p_valor_gentoo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.529381</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>p_valor_gentoo <span class="sc">&lt;</span> alpha</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Como pvalor é maior que alpha, aceitamos h0</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="co"># Portanto, ao nível de 5%,os dados mostram que a proporção da populacional de pinguins da espécie Gentoo é igaul a 0.3(30%).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
-<p><img src="bg_img/tux.png" class="slide-logo"></p>
-<div class="footer footer-default">
+</div>
+
+<img src="bg_img/tux.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p>Davi Augusto, Diogo Bolzan, João Arend, Luan Frederico</p>
 </div>
 </section></section>
