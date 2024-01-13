@@ -13,9 +13,8 @@ format:
     theme: [default, dd.scss]
     
 ---
-```{r setting_vars, include=FALSE, warning=FALSE}
+```{r libraries, include=FALSE, warning=FALSE}
 
-#Bibliotecas Usadas:
 library(readr)
 library(dplyr)
 library(gridExtra)
@@ -24,7 +23,11 @@ library(ggplot2)
 library(magick)
 library(tidyr)
 library(kableExtra)
+library(htmlwidgets)
+library(leaflet)
+```
 
+```{r setting_vars, include=FALSE, warning=FALSE}
 # DOCUMENTAÇÃO DO QUARTO https://quarto.org/docs/presentations/revealjs/
 
 #Carregando o Data Base Penguins:
@@ -168,17 +171,47 @@ knitr::kable(media_gentoo,
 :::
 :::
 ## Sobre as espécies
-
-Uma visão geral sobre o dataset escolhido: 
-
 ::: {.panel-tabset}
 
 ### Visão Geográfica
+```{r geo_map}
 
-![](bg_img/islands.jpeg){width="100%"height="auto"}
+leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=-65.5000, lat=-65.4333, popup="Biscoe Island") %>%
+  addMarkers(lng=-64.2333 , lat=-64.7333, popup="Dream Island") %>%
+  addMarkers(lng=-64.083333, lat=-64.7666636, popup="Torgersen Island") %>%
+  addProviderTiles("Esri.WorldImagery")
 
-### Algumas observações
+```
 
+### Ocupação
+
+```{r habitat}
+
+penguis_island_presence <- penguins_db %>%
+  group_by(species, island) %>%
+  summarise(contagem = n(), .groups = "drop")
+
+ggplot(penguis_island_presence, aes(x=island, y=species, fill = contagem)) +
+  geom_tile() + 
+  geom_text(aes(label = contagem), color = "white", size = 4) + 
+  labs(x = "",
+       y = "") + 
+  coord_fixed() +
+  theme_bw() + 
+  theme(legend.position = "none", 
+        plot.background = element_blank(),
+        panel.background = element_blank(),                                     
+        panel.border = element_blank(), 
+        axis.text = element_text(size = rel(1.5)))
+
+```
+
+### Observações
+
+::: columns
+::: {.column width="70%"}
 ```{r species_resum_min_max}
 
 species_resum <- penguins_db %>%
@@ -196,7 +229,7 @@ species_resum <- penguins_db %>%
     body_mass_max = max(body_mass_g, na.rm = TRUE),
   ) %>%
   rename(
-    "Total de observações" = nrows_species,
+    "Total de registros" = nrows_species,
     "Quant. de machos" = male_count,
     "Quant. de fêmeas" = female_count,
     "Menor comprimento do bico (mm)" = bill_length_min,
@@ -212,7 +245,69 @@ species_resum <- penguins_db %>%
 knitr::kable(t(species_resum[, 2:ncol(species_resum)]),
              col.names = c(species_resum$species)) %>%
   kable_styling(font_size = 17.5)
+ 
 ```
+:::
+::: {.column width="30%"}
+
+![](bg_img/pingu.png){width="100%" height="auto"}
+
+:::
+:::
+### Proporções Físicas 
+
+Relação entre comprimento da nadadeira e massa corporal
+```{r body_mass_flipper}
+
+ggplot(data=penguins_db,aes(x=flipper_length_mm,y=body_mass_g)) +
+  geom_point(aes(shape=species,color=species), size = 2) + 
+  labs(x = "Comprimento da nadadeira (mm)",
+       y = "Massa Corporal (g)") + 
+  theme_bw() + 
+  theme(text = element_text(size = 12))
+ 
+ggplot(data=subset(penguins_db, sex %in% c("male", "female")))+
+  geom_point(mapping=aes(x=flipper_length_mm, y=body_mass_g, color=species,shape=species))+
+  labs(x = "Comprimento da nadadeira (mm)",
+       y = "Massa Corporal (g)") + 
+  facet_wrap(~sex) + 
+  theme_bw()+ 
+  theme(text = element_text(size = 12))
+
+```
+
+Comparação da distribuição da massa corporal por espécie
+```{r boxplot}
+
+ggplot(penguins_db, aes(x = species, y = body_mass_g, fill = species)) +
+  geom_boxplot() +
+  labs(x = "Espécie",
+       y = "Massa (g)") +
+  theme_bw() + 
+  theme(text = element_text(size = 12))
+
+```
+
+Relação entre comprimento e profundidade do bico
+```{r bill_lenght_depth}
+
+ggplot(data=penguins_db,aes(x=bill_length_mm,y=bill_depth_mm)) +
+  geom_point(aes(shape=species,color=species), size = 2) +
+  labs(x = "Comprimento do bico (mm)",
+       y = "Profundidade do bico (mm)") + 
+  theme_bw() + 
+  theme(text = element_text(size = 12))
+
+ggplot(data=subset(penguins_db, sex %in% c("male", "female")))+
+  geom_point(mapping=aes(x=bill_length_mm, y=bill_depth_mm, color=species,shape=species))+
+  labs(x = "Comprimento do bico (mm)",
+       y = "Profundidade do bico (mm)") + 
+  facet_wrap(~sex) + 
+  theme_bw()+ 
+  theme(text = element_text(size = 12))
+
+```
+
 :::
 
 # Pesquisas
@@ -231,34 +326,27 @@ knitr::kable(head(species_separadas_adelie[, 2:ncol(species_separadas_adelie)]),
   align = "ccrrrrcc"
 ) %>%
   kable_styling(font_size = 20)
+
 ```
 
 ### Intervalo de confiança:
 
+Histograma de amostras do comprimento da nadadeira (mm)
 
 ```{r Curva Teórica Explicação, warning=FALSE, message=FALSE}
 
 set.seed(1234)
 
-#Histrograma da variável Flipper Lenght
-flipper_lenght_adelie <- ggplot(data = data.frame(x = species_separadas_adelie$flipper_length_mm),
-       aes(x = x)) +
-  geom_histogram(color = "#00a6ff") +
-  labs(title = "Histograma dos dados da Amostra",
-       x = "Comprimento da Nadadeira (mm)",
-       y = "Frequência")
-
-# Única maneira que eu encontrei de fazer o gráfico ficar de maneira correta
-# no tabs...
-# To salvando em imagem o gráfico, e adicionando em baixo
-# Histograma dos dados da variável Comprimento da Nadadeira (mm)
-ggsave("flipper_lenght_adelie.png", plot = flipper_lenght_adelie)
+ggplot(data = data.frame(x = species_separadas_adelie$flipper_length_mm), aes(x = x)) +
+  geom_histogram(color="#164863", fill="#427D9D") +
+  labs(x = "Comprimento da Nadadeira (mm)",
+       y = "Frequência") + 
+  theme_bw()+ 
+  theme(text = element_text(size = 12)) + 
+  geom_text(x = 205, y = 18, label = "Limite Superior: 190.993 mm ", alpha = 0.03) +
+  geom_text(x = 205, y = 16.5, label = "Limite Inferior: 188.914 mm ", alpha = 0.03)
 
 ```
-![](flipper_lenght_adelie.png){width="1000" height="500"}
-
-
-limite inferior -> 188.914, limite superior -> 190.9932
 
 ::: footer
 .
@@ -266,7 +354,10 @@ limite inferior -> 188.914, limite superior -> 190.9932
 :::
 
 ## IC (Com Bootstrap!)
-O intervalo de confiança pode ser cálculado utilizando a fórmula ou usando Bootstrapping!
+
+O que é e como funciona:
+
+![](bg_img/bootimg.png){.r-stretch width="100%" height="auto"}
 
 ```{r, echo = FALSE, include=FALSE}
 
@@ -289,7 +380,6 @@ lim_inf
 
 #Gerando o limite Superior pela fórmula:
 lim_sup <- media_adelie + z * sd_adelie/sqrt(n)
-lim_sup
 
 ```
 
@@ -332,30 +422,14 @@ lim_sup_boot  <- qnorm(p = 0.025,
 
 ```
 
-Um exemplo de como o bootstrap funciona:
-![](bg_img/bootimg.png){.r-stretch width="1040" height="300"}
-
-
 ## Na prática
 ::: {.panel-tabset}
 
 ### Intervalo Bootstraping
 
-```{r Intervalo de Confiança,warning=FALSE}
-# Criando os gráficos
-#Histograma Do BootStrapinng
+Histograma das médias geradas pelo BootStraping com Curva Teórica
 
-# ggplot(data = data, aes(x = x)) +
-#   geom_histogram(aes(y = after_stat(density)),
-#   fill = "#FC9E21",
-#   binwidth = 0.1,
-#   color = "black") +
-#   theme_minimal() +
-#   labs(title = "Histograma das médias geradas pelo BootStraping",
-#        subtitle = "Espécie Adelie considerando o comprimento da nadadeira",
-#        x = "Comprimento da Nadadeira (mm)",
-#        y = "Densidade",
-#        fill = "Distribuição")
+```{r Intervalo de Confiança,warning=FALSE}
 
 ggplot(data = data, aes(x = x)) +
   geom_histogram(aes(y = after_stat(density)),
@@ -368,8 +442,7 @@ ggplot(data = data, aes(x = x)) +
                 color = "#100818",
                 size = 1) +
   theme_minimal() +
-  labs(title = "Histograma das médias geradas pelo BootStraping com Curva Teórica", # nolint: line_length_linter.
-       subtitle = "Espécie Adelie considerando o comprimento da nadadeira",
+  labs(subtitle = "Espécie Adelie considerando o comprimento da nadadeira",
        x = "Comprimento da Nadadeira (mm)",
        y = "Densidade",
        fill = "Distribuição")
@@ -378,7 +451,7 @@ ggplot(data = data, aes(x = x)) +
 
 
 ### IC - Curva Teórica
-Verifica-se a Curva Normal Teórica com o Intervalo de confiança calculado na curva teórica!
+Verifica-se a curva normal teórica com o IC calculado na curva teórica!
 
 ```{r Intervalo com Curva Teórica, warning=FALSE}
 #Intervalo de Confiança na curva teórica
@@ -405,8 +478,8 @@ ggplot(data = data, aes(x = x)) +
        x = "Comprimento da Nadadeira (mm)",
        y = "Densidade",
        fill = "Distribuição") +
-  geom_text(x = 191.5, y = 0.7, label = "Limite Superior: 190.9 mm ", alpha = 0.02, size = 6) +
-  geom_text(x = 191.458, y = 0.62, label = "Limite Inferior: 188.9 mm ", alpha = 0.02, size = 6)
+  geom_text(x = 191.5, y = 0.7, label = "Limite Superior: 190.9 mm ", alpha = 0.03) +
+  geom_text(x = 191.458, y = 0.62, label = "Limite Inferior: 188.9 mm ", alpha = 0.03)
 
 ```
 
@@ -504,9 +577,6 @@ lim_sup_boot_adelie <- qnorm(p = 0.025,
                              sd = sd(repeticoes_media_adelie, na.rm = TRUE), 
                              lower.tail = FALSE)
 
-
-
-
 ########## GRÁFICO TODAS ESPÉCIES ##############
 g11  <- ggplot(data = data, aes(x = x)) +
   geom_histogram(aes(y = after_stat(density)),
@@ -519,7 +589,7 @@ g11  <- ggplot(data = data, aes(x = x)) +
                 size = 1) +
   theme_minimal() +
   labs(title = "Histograma das médias",
-      subtitle = "Para Espécie Adelie",
+      subtitle = "Adelie",
        x = "Comprimento da Nadadeira (mm)",
        y = "Densidade",
        fill = "Distribuição")
@@ -543,7 +613,7 @@ g22 <- ggplot(data = data, aes(x = x)) +
                 xlim = c(lim_sup, 192)) +
   theme_minimal() +
   labs(title = "Curva Normal Considerando IC",
-       subtitle = "Para Espécie Adélie",
+       subtitle = "Adelie",
        x = "Comprimento da Nadadeira (mm)",
        y = "Densidade",
        fill = "Distribuição")
@@ -561,7 +631,7 @@ g33 <- ggplot(data = data.frame(x = repeticoes_media_gentoo), aes(x = x)) +
                 ) +
   theme_minimal() +
   labs(title = "",
-      subtitle = "Para espécie Gentoo",
+      subtitle = "Gentoo",
       x = "Comprimento da Nadadeira (mm)",
       y = "Densidade")
 
@@ -584,7 +654,7 @@ g44 <- ggplot(data = data.frame(x = repeticoes_media_gentoo), aes(x = x)) +
                 alpha = 0.7) +
   theme_minimal() +
   labs(title = "",
-      subtitle = "Para espécie Gentoo",
+      subtitle = "Gentoo",
       x = "Comprimento da Nadadeira (mm)",
       y = "Densidade")
 
@@ -601,7 +671,7 @@ g55 <- ggplot(data = data.frame(x = repeticoes_media_chinstrap), aes(x = x)) +
                 ) +
   theme_minimal() +
   labs(title = "",
-      subtitle = "Para espécie Chinstrap",
+      subtitle = "Chinstrap",
       x = "Comprimento da Nadadeira (mm)",
       y = "Densidade")
 
@@ -624,27 +694,26 @@ g66 <- ggplot(data = data.frame(x = repeticoes_media_chinstrap), aes(x = x)) +
                 alpha = 0.7) +
   theme_minimal() +
   labs(title = "",
-      subtitle = "Para espécie Chinstrap",
+      subtitle = "Chinstrap",
       x = "Comprimento da Nadadeira (mm)",
       y = "Densidade")
 
-
-
-grid.arrange(g11,g22,g33,g44,g55,g66, top = "Análise Conjunta")
+grid.arrange(g11,g22,g33,g44,g55,g66)
 ```
 
 ### Comparação
+
+Limites Inferiores e Superiores para as espécies
 
 ```{r}
 # Aqui que eu faço a tabelinha com a comparação dos limites
 resultados <- data.frame(
   Espécie = c("Chinstrap", "Gentoo", "Adelie"),
   Limite_Inferior = c(lim_inf_boot_chinstrap, lim_inf_boot_gentoo, lim_inf_boot_adelie),
-  Limite_Superior = c(lim_sup_boot_chinstrap, lim_sup_boot_gentoo, lim_inf_boot_adelie)
-)
+  Limite_Superior = c(lim_sup_boot_chinstrap, lim_sup_boot_gentoo, lim_inf_boot_adelie))
 
-knitr::kable(resultados, caption = "Limites Inferiores e Superiores para as espécies Chinstrap e Gentoo")
-
+knitr::kable(resultados, 
+             align = "crr")
 ```
 :::
 
