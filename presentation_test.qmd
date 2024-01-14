@@ -198,13 +198,13 @@ ggplot(penguis_island_presence, aes(x=island, y=species, fill = contagem)) +
   geom_text(aes(label = contagem), color = "white", size = 4) + 
   labs(x = "",
        y = "") + 
-  coord_fixed() +
   theme_bw() + 
-  theme(legend.position = "none", 
-        plot.background = element_blank(),
-        panel.background = element_blank(),                                     
-        panel.border = element_blank(), 
-        axis.text = element_text(size = rel(1.5)))
+  theme(plot.background = element_rect(fill = "#fcfbf9"),
+        legend.background = element_rect(fill = "#fcfbf9"),
+        panel.background = element_rect(fill = "#fcfbf9"),
+        legend.key = element_rect(fill = "#fcfbf9"),
+        panel.border = element_rect(fill = "NA", color = "#fcfbf9"),
+        plot.margin = margin(0,0,0,0))
 
 ```
 
@@ -264,7 +264,13 @@ ggplot(data=penguins_db,aes(x=flipper_length_mm,y=body_mass_g)) +
   labs(x = "Comprimento da nadadeira (mm)",
        y = "Massa Corporal (g)") + 
   theme_bw() + 
-  theme(text = element_text(size = 12))
+  theme(plot.background = element_rect(fill = "#fcfbf9"),
+        legend.background = element_rect(fill = "#fcfbf9"),
+        panel.background = element_rect(fill = "#fcfbf9"),
+        legend.key = element_rect(fill = "#fcfbf9"),
+        panel.border = element_rect(fill = "NA", color = "#fcfbf9"),
+        plot.margin = margin(0,0,0,0),
+        text = element_text(size = 12))
  
 ggplot(data=subset(penguins_db, sex %in% c("male", "female")))+
   geom_point(mapping=aes(x=flipper_length_mm, y=body_mass_g, color=species,shape=species))+
@@ -272,7 +278,13 @@ ggplot(data=subset(penguins_db, sex %in% c("male", "female")))+
        y = "Massa Corporal (g)") + 
   facet_wrap(~sex) + 
   theme_bw()+ 
-  theme(text = element_text(size = 12))
+  theme(plot.background = element_rect(fill = "#fcfbf9"),
+        legend.background = element_rect(fill = "#fcfbf9"),
+        panel.background = element_rect(fill = "#fcfbf9"),
+        legend.key = element_rect(fill = "#fcfbf9"),
+        panel.border = element_rect(fill = "NA", color = "#fcfbf9"),
+        plot.margin = margin(0,0,0,0),
+        text = element_text(size = 12))
 
 ```
 
@@ -284,7 +296,13 @@ ggplot(penguins_db, aes(x = species, y = body_mass_g, fill = species)) +
   labs(x = "Espécie",
        y = "Massa (g)") +
   theme_bw() + 
-  theme(text = element_text(size = 12))
+  theme(plot.background = element_rect(fill = "#fcfbf9"),
+        legend.background = element_rect(fill = "#fcfbf9"),
+        panel.background = element_rect(fill = "#fcfbf9"),
+        legend.key = element_rect(fill = "#fcfbf9"),
+        panel.border = element_rect(fill = "NA", color = "#fcfbf9"),
+        plot.margin = margin(0,0,0,0),
+        text = element_text(size = 12))
 
 ```
 
@@ -296,7 +314,13 @@ ggplot(data=penguins_db,aes(x=bill_length_mm,y=bill_depth_mm)) +
   labs(x = "Comprimento do bico (mm)",
        y = "Profundidade do bico (mm)") + 
   theme_bw() + 
-  theme(text = element_text(size = 12))
+  theme(plot.background = element_rect(fill = "#fcfbf9"),
+        legend.background = element_rect(fill = "#fcfbf9"),
+        panel.background = element_rect(fill = "#fcfbf9"),
+        legend.key = element_rect(fill = "#fcfbf9"),
+        panel.border = element_rect(fill = "NA", color = "#fcfbf9"),
+        plot.margin = margin(0,0,0,0),
+        text = element_text(size = 12))
 
 ggplot(data=subset(penguins_db, sex %in% c("male", "female")))+
   geom_point(mapping=aes(x=bill_length_mm, y=bill_depth_mm, color=species,shape=species))+
@@ -304,7 +328,13 @@ ggplot(data=subset(penguins_db, sex %in% c("male", "female")))+
        y = "Profundidade do bico (mm)") + 
   facet_wrap(~sex) + 
   theme_bw()+ 
-  theme(text = element_text(size = 12))
+  theme(plot.background = element_rect(fill = "#fcfbf9"),
+        legend.background = element_rect(fill = "#fcfbf9"),
+        panel.background = element_rect(fill = "#fcfbf9"),
+        legend.key = element_rect(fill = "#fcfbf9"),
+        panel.border = element_rect(fill = "NA", color = "#fcfbf9"),
+        plot.margin = margin(0,0,0,0),
+        text = element_text(size = 12))
 
 ```
 
@@ -344,7 +374,13 @@ ggplot(data = data.frame(x = species_separadas_adelie$flipper_length_mm), aes(x 
   theme_bw()+ 
   theme(text = element_text(size = 12)) + 
   geom_text(x = 205, y = 18, label = "Limite Superior: 190.993 mm ", alpha = 0.03) +
-  geom_text(x = 205, y = 16.5, label = "Limite Inferior: 188.914 mm ", alpha = 0.03)
+  geom_text(x = 205, y = 16.5, label = "Limite Inferior: 188.914 mm ", alpha = 0.03) +
+  theme(plot.background = element_rect(fill = "#fcfbf9"),
+        legend.background = element_rect(fill = "#fcfbf9"),
+        panel.background = element_rect(fill = "#fcfbf9"),
+        legend.key = element_rect(fill = "#fcfbf9"),
+        panel.border = element_rect(fill = "NA", color = "#fcfbf9"),
+        plot.margin = margin(0,0,0,0))
 
 ```
 
@@ -441,11 +477,17 @@ ggplot(data = data, aes(x = x)) +
                             sd = sd(data$x, na.rm = TRUE)),
                 color = "#100818",
                 size = 1) +
-  theme_minimal() +
+  theme_bw() +
   labs(title = "Espécie Adelie considerando o comprimento da nadadeira",
        x = "Comprimento da Nadadeira (mm)",
        y = "Densidade",
-       fill = "Distribuição")
+       fill = "Distribuição") +
+  theme(plot.background = element_rect(fill = "#fcfbf9"),
+        legend.background = element_rect(fill = "#fcfbf9"),
+        panel.background = element_rect(fill = "#fcfbf9"),
+        legend.key = element_rect(fill = "#fcfbf9"),
+        panel.border = element_rect(fill = "NA", color = "#fcfbf9"),
+        plot.margin = margin(0,0,0,0))
 
 ```
 
@@ -472,14 +514,19 @@ ggplot(data = data, aes(x = x)) +
                 geom = "area", fill = "blue",
                 alpha = 0.2,
                 xlim = c(lim_sup, 192)) +
-  theme_minimal() +
+  theme_bw() +
   labs(title = "Curva Normal das Médias Geradas pelo BootStraping considerando IC",
        subtitle = "Para espécie Adélie considerando o comprimento da nadadeira",
        x = "Comprimento da Nadadeira (mm)",
        y = "Densidade",
        fill = "Distribuição") +
-  geom_text(x = 191.5, y = 0.7, label = "Limite Inferior: 188.9 mm ", alpha = 0.03) +
-  geom_text(x = 191.458, y = 0.62, label = "Limite Superior: 190.9 mm ", alpha = 0.03)
+  geom_text(x = 191.5, y = 0.7, label = "Limite Inferior: 188.9 mm\nLimite Superior: 190.9 mm ", alpha = 0.03) +
+  theme(plot.background = element_rect(fill = "#fcfbf9"),
+        legend.background = element_rect(fill = "#fcfbf9"),
+        panel.background = element_rect(fill = "#fcfbf9"),
+        legend.key = element_rect(fill = "#fcfbf9"),
+        panel.border = element_rect(fill = "NA", color = "#fcfbf9"),
+        plot.margin = margin(0,0,0,0))
 
 ```
 Logo, um intervalo de confiança com um nível de confiança de 95% indica que, em teoria, se selecionássemos uma amostra de mesmo tamanho de uma mesma população muitas vezes e calculássemos o intervalo de confiança para cada uma delas, aproximadamente 95% desses intervalos incluiriam o verdadeiro valor do parâmetro.
@@ -588,11 +635,17 @@ g3 <- ggplot(data = data.frame(x = repeticoes_media_gentoo), aes(x = x)) +
                 color = "black",
                 size = 1
                 ) +
-  theme_minimal() +
+  theme_bw() +
   labs(title = "Histograma das médias geradas pelo BootStraping",
       subtitle = "Para espécie Gentoo considerando a Variável Comprimento da Nadadeira",
       x = "Comprimento da Nadadeira (mm)",
-      y = "Densidade")
+      y = "Densidade") +
+  theme(plot.background = element_rect(fill = "#fcfbf9"),
+        legend.background = element_rect(fill = "#fcfbf9"),
+        panel.background = element_rect(fill = "#fcfbf9"),
+        legend.key = element_rect(fill = "#fcfbf9"),
+        panel.border = element_rect(fill = "NA", color = "#fcfbf9"),
+        plot.margin = margin(0,0,0,0))
 
 g4 <- ggplot(data = data.frame(x = repeticoes_media_gentoo), aes(x = x)) +
   stat_function(fun = dnorm,
@@ -611,13 +664,18 @@ g4 <- ggplot(data = data.frame(x = repeticoes_media_gentoo), aes(x = x)) +
                 xlim = c(lim_sup_boot_gentoo, 220),
                 fill = "#d19b2f",
                 alpha = 0.7) +
-  theme_minimal() +
+  theme_bw() +
   labs(title = "Curva Normal das médias geradas pelo BootStraping considerando IC",
       subtitle = "Para espécie Gentoo considerando a Variável Comprimento da Nadadeira",
       x = "Comprimento da Nadadeira (mm)",
       y = "Densidade") +
-  geom_text(x = 218.8, y = 0.7, label = "Limite Inferior: 216.1 mm ", alpha = 0.02) +
-  geom_text(x = 218.8418, y = 0.6, label = "Limite Superior: 218.2 mm ", alpha = 0.02)
+  geom_text(x = 218.8, y = 0.7, label = "Limite Inferior: 216.1 mm\nLimite Superior: 218.2 mm", alpha = 0.02) +
+  theme(plot.background = element_rect(fill = "#fcfbf9"),
+        legend.background = element_rect(fill = "#fcfbf9"),
+        panel.background = element_rect(fill = "#fcfbf9"),
+        legend.key = element_rect(fill = "#fcfbf9"),
+        panel.border = element_rect(fill = "NA", color = "#fcfbf9"),
+        plot.margin = margin(0,0,0,0))
 
 grid.arrange(g3,g4)
 
@@ -647,11 +705,17 @@ g5 <- ggplot(data = data.frame(x = repeticoes_media_chinstrap), aes(x = x)) +
                 color = "black",
                 size = 1
                 ) +
-  theme_minimal() +
+  theme_bw() +
   labs(title = "Histograma das médias geradas pelo BootStraping",
       subtitle = "Para espécie Chinstrap considerando a Variável Comprimento da Nadadeira",
       x = "Comprimento da Nadadeira (mm)",
-      y = "Densidade")
+      y = "Densidade") +
+  theme(plot.background = element_rect(fill = "#fcfbf9"),
+        legend.background = element_rect(fill = "#fcfbf9"),
+        panel.background = element_rect(fill = "#fcfbf9"),
+        legend.key = element_rect(fill = "#fcfbf9"),
+        panel.border = element_rect(fill = "NA", color = "#fcfbf9"),
+        plot.margin = margin(0,0,0,0))
 
 g6 <- ggplot(data = data.frame(x = repeticoes_media_chinstrap), aes(x = x)) +
   stat_function(fun = dnorm,
@@ -670,13 +734,18 @@ g6 <- ggplot(data = data.frame(x = repeticoes_media_chinstrap), aes(x = x)) +
                 xlim = c(lim_sup_boot_chinstrap, 198),
                 fill = "#a76bcf",
                 alpha = 0.7) +
-  theme_minimal() +
+  theme_bw() +
   labs(title = "Curva Normal das médias geradas pelo BootStraping considerando IC",
       subtitle = "Para espécie Chinstrap considerando a Variável Comprimento da Nadadeira",
       x = "Comprimento da Nadadeira (mm)",
       y = "Densidade") +
-  geom_text(x = 197.5, y = 0.64, label = "Limite Inferior: 194.6 mm", alpha = 0.02) +
-  geom_text(x = 197.54, y = 0.54, label = "Limite Superior: 196.9 mm", alpha = 0.02)
+  geom_text(x = 197.5, y = 0.64, label = "Limite Inferior: 194.6 mm\nLimite Superior: 196.9 mm", alpha = 0.02) +
+  theme(plot.background = element_rect(fill = "#fcfbf9"),
+        legend.background = element_rect(fill = "#fcfbf9"),
+        panel.background = element_rect(fill = "#fcfbf9"),
+        legend.key = element_rect(fill = "#fcfbf9"),
+        panel.border = element_rect(fill = "NA", color = "#fcfbf9"),
+        plot.margin = margin(0,0,0,0))
 
 grid.arrange(g5,g6)
 ```
