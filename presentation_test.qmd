@@ -442,7 +442,7 @@ ggplot(data = data, aes(x = x)) +
                 color = "#100818",
                 size = 1) +
   theme_minimal() +
-  labs(subtitle = "Espécie Adelie considerando o comprimento da nadadeira",
+  labs(title = "Espécie Adelie considerando o comprimento da nadadeira",
        x = "Comprimento da Nadadeira (mm)",
        y = "Densidade",
        fill = "Distribuição")
@@ -478,10 +478,11 @@ ggplot(data = data, aes(x = x)) +
        x = "Comprimento da Nadadeira (mm)",
        y = "Densidade",
        fill = "Distribuição") +
-  geom_text(x = 191.5, y = 0.7, label = "Limite Superior: 190.9 mm ", alpha = 0.03) +
-  geom_text(x = 191.458, y = 0.62, label = "Limite Inferior: 188.9 mm ", alpha = 0.03)
+  geom_text(x = 191.5, y = 0.7, label = "Limite Inferior: 188.9 mm ", alpha = 0.03) +
+  geom_text(x = 191.458, y = 0.62, label = "Limite Superior: 190.9 mm ", alpha = 0.03)
 
 ```
+Logo, um intervalo de confiança com um nível de confiança de 95% indica que, em teoria, se selecionássemos uma amostra de mesmo tamanho de uma mesma população muitas vezes e calculássemos o intervalo de confiança para cada uma delas, aproximadamente 95% desses intervalos incluiriam o verdadeiro valor do parâmetro.
 
 ### Comparação
 Verifica-se que os intervalos de confiança com fórmula 'tradicional' e com Bootstrap são praticamente os mesmos:
@@ -502,10 +503,10 @@ knitr::kable(comp_table,
 
 :::
 
-## Todas as espécies
+## Gentoo e Chinstrap!
 ::: {.panel-tabset}
 
-### Ánalise Conjunta
+### Ánalise Gentoo
 
 ```{r Todas, warning=FALSE}
 #Análise de todas juntas
@@ -577,50 +578,8 @@ lim_sup_boot_adelie <- qnorm(p = 0.025,
                              sd = sd(repeticoes_media_adelie, na.rm = TRUE), 
                              lower.tail = FALSE)
 
-########## GRÁFICO TODAS ESPÉCIES ##############
-g11  <- ggplot(data = data, aes(x = x)) +
-  geom_histogram(aes(y = after_stat(density)),
-                fill = "#FC9E21",
-                binwidth = 0.1,
-                color = "black") +
-  stat_function(fun = dnorm,
-                args = list(mean = mean(data$x, na.rm = TRUE), sd = sd(data$x, na.rm = TRUE)),
-                color = "#100818",
-                size = 1) +
-  theme_minimal() +
-  labs(title = "Histograma das médias",
-      subtitle = "Adelie",
-       x = "Comprimento da Nadadeira (mm)",
-       y = "Densidade",
-       fill = "Distribuição")
-
-g22 <- ggplot(data = data, aes(x = x)) +
-  stat_function(fun = dnorm,
-                args = list(mean = mean(data$x, na.rm = TRUE),
-                            sd = sd(data$x, na.rm = TRUE)),
-                color = "#100818", size = 1) +
-  stat_function(fun = dnorm,
-                args = list(mean = mean(data$x, na.rm = TRUE),
-                            sd = sd(data$x, na.rm = TRUE)),
-                geom = "area", fill = "blue",
-                alpha = 0.2,
-                xlim = c(188, lim_inf)) +
-  stat_function(fun = dnorm,
-                args = list(mean = mean(data$x, na.rm = TRUE),
-                            sd = sd(data$x, na.rm = TRUE)),
-                geom = "area", fill = "blue",
-                alpha = 0.2,
-                xlim = c(lim_sup, 192)) +
-  theme_minimal() +
-  labs(title = "Curva Normal Considerando IC",
-       subtitle = "Adelie",
-       x = "Comprimento da Nadadeira (mm)",
-       y = "Densidade",
-       fill = "Distribuição")
-
-
-g33 <- ggplot(data = data.frame(x = repeticoes_media_gentoo), aes(x = x)) +
-  geom_histogram(aes(y = ..density..) ,
+g3 <- ggplot(data = data.frame(x = repeticoes_media_gentoo), aes(x = x)) +
+  geom_histogram(aes(y = after_stat(density)) ,
                 binwidth = 0.1,
                 fill = "#3E8F92",
                 color = "black") +
@@ -630,12 +589,12 @@ g33 <- ggplot(data = data.frame(x = repeticoes_media_gentoo), aes(x = x)) +
                 size = 1
                 ) +
   theme_minimal() +
-  labs(title = "",
-      subtitle = "Gentoo",
+  labs(title = "Histograma das médias geradas pelo BootStraping",
+      subtitle = "Para espécie Gentoo considerando a Variável Comprimento da Nadadeira",
       x = "Comprimento da Nadadeira (mm)",
       y = "Densidade")
 
-g44 <- ggplot(data = data.frame(x = repeticoes_media_gentoo), aes(x = x)) +
+g4 <- ggplot(data = data.frame(x = repeticoes_media_gentoo), aes(x = x)) +
   stat_function(fun = dnorm,
                 args = list(mean = mean(repeticoes_media_gentoo, na.rm = TRUE), sd = sd(repeticoes_media_gentoo, na.rm = TRUE)),
                 color = "black",
@@ -653,13 +612,32 @@ g44 <- ggplot(data = data.frame(x = repeticoes_media_gentoo), aes(x = x)) +
                 fill = "#d19b2f",
                 alpha = 0.7) +
   theme_minimal() +
-  labs(title = "",
-      subtitle = "Gentoo",
+  labs(title = "Curva Normal das médias geradas pelo BootStraping considerando IC",
+      subtitle = "Para espécie Gentoo considerando a Variável Comprimento da Nadadeira",
       x = "Comprimento da Nadadeira (mm)",
-      y = "Densidade")
+      y = "Densidade") +
+  geom_text(x = 218.8, y = 0.7, label = "Limite Inferior: 216.1 mm ", alpha = 0.02) +
+  geom_text(x = 218.8418, y = 0.6, label = "Limite Superior: 218.2 mm ", alpha = 0.02)
 
+grid.arrange(g3,g4)
 
-g55 <- ggplot(data = data.frame(x = repeticoes_media_chinstrap), aes(x = x)) +
+```
+Logo, podemos afirmar que há 95% de confiança do intervalo [216.1, 218.2] conter o verdadeiro valor do parâmetro.
+
+### Análise Chinstrap
+
+```{r, warning=FALSE}
+n_repeticoes <- 10000 #número de repetições de amostras
+repeticoes_media_chinstrap <- as.numeric(n_repeticoes) #vetor que armazena as repetições de amostras
+for (i in 1:n_repeticoes) {
+  amostra <- sample(species_separadas_chinstrap$flipper_length_mm, size = n, replace = TRUE)
+  repeticoes_media_chinstrap[i] <- mean(amostra, na.rm = TRUE)
+}
+
+lim_inf_boot_chinstrap  <- qnorm(p = 0.025, mean = mean(repeticoes_media_chinstrap), sd = sd(repeticoes_media_chinstrap, na.rm = TRUE)) #Limite Inferior
+lim_sup_boot_chinstrap  <- qnorm(p = 0.025, mean = mean(repeticoes_media_chinstrap), sd = sd(repeticoes_media_chinstrap, na.rm = TRUE), lower.tail = FALSE) #Limite Superior
+
+g5 <- ggplot(data = data.frame(x = repeticoes_media_chinstrap), aes(x = x)) +
   geom_histogram(aes(y = ..density..) ,
                 binwidth = 0.1,
                 fill = "#B03060",
@@ -670,12 +648,12 @@ g55 <- ggplot(data = data.frame(x = repeticoes_media_chinstrap), aes(x = x)) +
                 size = 1
                 ) +
   theme_minimal() +
-  labs(title = "",
-      subtitle = "Chinstrap",
+  labs(title = "Histograma das médias geradas pelo BootStraping",
+      subtitle = "Para espécie Chinstrap considerando a Variável Comprimento da Nadadeira",
       x = "Comprimento da Nadadeira (mm)",
       y = "Densidade")
 
-g66 <- ggplot(data = data.frame(x = repeticoes_media_chinstrap), aes(x = x)) +
+g6 <- ggplot(data = data.frame(x = repeticoes_media_chinstrap), aes(x = x)) +
   stat_function(fun = dnorm,
                 args = list(mean = mean(repeticoes_media_chinstrap, na.rm = TRUE), sd = sd(repeticoes_media_chinstrap, na.rm = TRUE)),
                 color = "black",
@@ -693,28 +671,16 @@ g66 <- ggplot(data = data.frame(x = repeticoes_media_chinstrap), aes(x = x)) +
                 fill = "#a76bcf",
                 alpha = 0.7) +
   theme_minimal() +
-  labs(title = "",
-      subtitle = "Chinstrap",
+  labs(title = "Curva Normal das médias geradas pelo BootStraping considerando IC",
+      subtitle = "Para espécie Chinstrap considerando a Variável Comprimento da Nadadeira",
       x = "Comprimento da Nadadeira (mm)",
-      y = "Densidade")
+      y = "Densidade") +
+  geom_text(x = 197.5, y = 0.64, label = "Limite Inferior: 194.6 mm", alpha = 0.02) +
+  geom_text(x = 197.54, y = 0.54, label = "Limite Superior: 196.9 mm", alpha = 0.02)
 
-grid.arrange(g11,g22,g33,g44,g55,g66)
+grid.arrange(g5,g6)
 ```
-
-### Comparação
-
-Limites Inferiores e Superiores para as espécies
-
-```{r}
-# Aqui que eu faço a tabelinha com a comparação dos limites
-resultados <- data.frame(
-  Espécie = c("Chinstrap", "Gentoo", "Adelie"),
-  Limite_Inferior = c(lim_inf_boot_chinstrap, lim_inf_boot_gentoo, lim_inf_boot_adelie),
-  Limite_Superior = c(lim_sup_boot_chinstrap, lim_sup_boot_gentoo, lim_inf_boot_adelie))
-
-knitr::kable(resultados, 
-             align = "crr")
-```
+Logo, podemos afirmar que há 95% de confiança do intervalo [194.6, 196.9] conter o verdadeiro valor do parâmetro.
 :::
 
 
