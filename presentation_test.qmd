@@ -825,3 +825,7 @@ p_valor_gentoo < alpha
 # Portanto, ao nível de 5%,os dados mostram que a proporção da populacional de pinguins da espécie Gentoo é igual a 0.3333(33%).
 ```
 :::
+
+## Muito Obrigado pela Atenção!
+
+![](bg_img/madagascar_bye.png){fig-align="center" width="900" height="auto"}
