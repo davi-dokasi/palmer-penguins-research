@@ -771,20 +771,26 @@ Logo, podemos afirmar que há 95% de confiança do intervalo [194.6, 196.9] cont
 # h1 é diferente de 0.33333
 p0 = 0.33333
 alpha = 0.05
-n_dataset= length(penguins_db$species) # amostra total
-n = length(species_separadas_adelie$species) # tamanho da espécie adélie no dt
+n_dataset= length(penguins_db$species) # Amostra total.
+n = length(species_separadas_adelie$species) # Tamanho da espécie Adélie no data base.
+p_chapeu_adelie = n/n_dataset
 
-p_chapeu_adelie = n/n_dataset # proporção adelie/amostra total
+# Estatística de Teste
+z_teste <- (p_chapeu_adelie-p0)/(sqrt(p0 *(1-p0)/n))
+z_teste
 
-z_adelie_1 = (p_chapeu_adelie-p0)/sqrt(p0*(1-p0)/n)
-z_adelie_1
+# Definir região critica.
+normq <- qnorm(1 - alpha/2) 
+normq
+# z_teste 2.838447 > normq  -2.241403 2.241403 REJEITA
 
-p_valor_adelie = pnorm(z_adelie_1)*2
-p_valor_adelie
+# Teste Bilateral do P-valor.
+p_valor_bilateral <- 2 * pnorm(-abs(z_teste)) 
+p_valor_bilateral
 
-p_valor_adelie < alpha
-# Como o pvalor é maior alpha, aceitamos h0
-# Portanto, ao nível de 5%,os dados mostram que a proporção da população de pinguins da espécie Adelie é igual a 0.3333(33%).
+p_valor_bilateral > alpha # REJEITA
+
+# Há evidências de que, ao nível de 95% confiança, os dados mostram que a proporção da população de pinguins da espécie Adelie é diferente a 33%.
 ```
 
 ### Chinstrap
@@ -795,15 +801,22 @@ p_valor_adelie < alpha
 n = length(species_separadas_chinstrap$species)
 p_chapeu_chinstrap = n/n_dataset
 
-z_chinstrap_1 = (p_chapeu_chinstrap-p0)/sqrt(p0*(1-p0)/n)
-z_chinstrap_1
+# Estatística de Teste
+z_teste <- (p_chapeu_chinstrap-p0)/(sqrt(p0 *(1 - p0)/n))
+z_teste
 
-p_valor_chinstrap = pnorm(z_chinstrap_1)*2
-p_valor_chinstrap
+# Definir região critica.
+normq <- qnorm(1 - alpha/2) 
+normq
+# z_teste -2.373009 > normq  -2.241403 2.241403 REJEITA
 
-p_valor_chinstrap < alpha
-# Como alpha é maior que o pvalor, rejeitamos h0
-# Ao nível de 5%,os dados mostram que a proporção populacional de pinguins da espécie Chinstrap diferente de 0.3333(33%).
+# Teste Bilateral do P-valor.
+p_valor_bilateral <- 2 * pnorm(-abs(z_teste)) 
+p_valor_bilateral
+
+p_valor_bilateral > alpha # REJEITA
+
+# Há evidências de que, ao nível de 95% confiança, os dados mostram que a proporção da população de pinguins da espécie Chinstrap é diferente a 33%.
 ```
 
 ### Gentoo
@@ -814,18 +827,25 @@ p_valor_chinstrap < alpha
 n = length(species_separadas_gentoo$species)
 p_chapeu_gentoo = n/n_dataset
 
-z_gentto_1 = (p_chapeu_gentoo-p0)/sqrt(p0*(1-p0)/n)
-z_gentto_1
+# Estatística de Teste
+z_teste <- (p_chapeu_gentoo-p0)/(sqrt(p0 *(1 - p0)/n))
+z_teste
 
-p_valor_gentoo = pnorm(z_gentto_1)*2
-p_valor_gentoo
+# Definir região critica.
+normq <- qnorm(1 - alpha/2) 
+normq
+# z_teste 0.640988 > normq  -2.241403 2.241403 ACEITA
 
-p_valor_gentoo < alpha
-# Como pvalor é maior que alpha, aceitamos h0
-# Portanto, ao nível de 5%,os dados mostram que a proporção da populacional de pinguins da espécie Gentoo é igual a 0.3333(33%).
+# Teste Bilateral do P-valor.
+p_valor_bilateral <- 2 * pnorm(-abs(z_teste)) 
+p_valor_bilateral
+
+p_valor_bilateral >  alpha # ACEITA
+
+# Há evidências de que, ao nível de 95% confiança, os dados mostram que a proporção da população de pinguins da espécie Gentoo é igual a 33%.
 ```
 :::
 
-## Muito Obrigado pela Atenção!
+## Muito obrigado pela atenção!
 
 ![](bg_img/madagascar_bye.png){fig-align="center" width="900" height="auto"}

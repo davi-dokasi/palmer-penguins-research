@@ -8,7 +8,7 @@
 <link href="presentation_test_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="presentation_test_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="presentation_test_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.541">
+  <meta name="generator" content="quarto-1.3.450">
 
   <title>Desvendando o Mundo dos Penguins com o Dataset Palmer Penguins 🐧</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -30,7 +30,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -220,8 +220,7 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -385,9 +384,10 @@
       margin-right: 0; 
     }
   </style>
+  
   <script src="presentation_test_files/libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="presentation_test_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-  <script src="presentation_test_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+  <script src="presentation_test_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
   <script src="presentation_test_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <link href="presentation_test_files/libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
   <script src="presentation_test_files/libs/leaflet-1.3.1/leaflet.js"></script>
@@ -465,16 +465,26 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">Chinstrap</td>
-<td style="text-align: center;">Dream</td>
-<td style="text-align: right;">48.1</td>
-<td style="text-align: right;">16.4</td>
-<td style="text-align: right;">199</td>
-<td style="text-align: right;">3325</td>
-<td style="text-align: center;">female</td>
-<td style="text-align: center;">2009</td>
+<td style="text-align: center;">Gentoo</td>
+<td style="text-align: center;">Biscoe</td>
+<td style="text-align: right;">49.8</td>
+<td style="text-align: right;">16.8</td>
+<td style="text-align: right;">230</td>
+<td style="text-align: right;">5700</td>
+<td style="text-align: center;">male</td>
+<td style="text-align: center;">2008</td>
 </tr>
 <tr class="even">
+<td style="text-align: center;">Adelie</td>
+<td style="text-align: center;">Dream</td>
+<td style="text-align: right;">40.8</td>
+<td style="text-align: right;">18.4</td>
+<td style="text-align: right;">195</td>
+<td style="text-align: right;">3900</td>
+<td style="text-align: center;">male</td>
+<td style="text-align: center;">2007</td>
+</tr>
+<tr class="odd">
 <td style="text-align: center;">Gentoo</td>
 <td style="text-align: center;">Biscoe</td>
 <td style="text-align: right;">46.1</td>
@@ -484,65 +494,55 @@
 <td style="text-align: center;">male</td>
 <td style="text-align: center;">2007</td>
 </tr>
+<tr class="even">
+<td style="text-align: center;">Adelie</td>
+<td style="text-align: center;">Dream</td>
+<td style="text-align: right;">36.2</td>
+<td style="text-align: right;">17.3</td>
+<td style="text-align: right;">187</td>
+<td style="text-align: right;">3300</td>
+<td style="text-align: center;">female</td>
+<td style="text-align: center;">2008</td>
+</tr>
 <tr class="odd">
 <td style="text-align: center;">Chinstrap</td>
 <td style="text-align: center;">Dream</td>
-<td style="text-align: right;">45.6</td>
-<td style="text-align: right;">19.4</td>
-<td style="text-align: right;">194</td>
-<td style="text-align: right;">3525</td>
-<td style="text-align: center;">female</td>
+<td style="text-align: right;">51.5</td>
+<td style="text-align: right;">18.7</td>
+<td style="text-align: right;">187</td>
+<td style="text-align: right;">3250</td>
+<td style="text-align: center;">male</td>
 <td style="text-align: center;">2009</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Adelie</td>
-<td style="text-align: center;">Torgersen</td>
-<td style="text-align: right;">35.1</td>
-<td style="text-align: right;">19.4</td>
-<td style="text-align: right;">193</td>
-<td style="text-align: right;">4200</td>
-<td style="text-align: center;">male</td>
-<td style="text-align: center;">2008</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Adelie</td>
 <td style="text-align: center;">Biscoe</td>
-<td style="text-align: right;">37.6</td>
-<td style="text-align: right;">17.0</td>
-<td style="text-align: right;">185</td>
-<td style="text-align: right;">3600</td>
-<td style="text-align: center;">female</td>
-<td style="text-align: center;">2008</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Adelie</td>
-<td style="text-align: center;">Dream</td>
-<td style="text-align: right;">36.0</td>
+<td style="text-align: right;">35.0</td>
 <td style="text-align: right;">17.9</td>
 <td style="text-align: right;">190</td>
 <td style="text-align: right;">3450</td>
 <td style="text-align: center;">female</td>
-<td style="text-align: center;">2007</td>
+<td style="text-align: center;">2008</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Gentoo</td>
-<td style="text-align: center;">Biscoe</td>
-<td style="text-align: right;">40.9</td>
-<td style="text-align: right;">13.7</td>
-<td style="text-align: right;">214</td>
-<td style="text-align: right;">4650</td>
+<td style="text-align: center;">Adelie</td>
+<td style="text-align: center;">Torgersen</td>
+<td style="text-align: right;">38.9</td>
+<td style="text-align: right;">17.8</td>
+<td style="text-align: right;">181</td>
+<td style="text-align: right;">3625</td>
 <td style="text-align: center;">female</td>
 <td style="text-align: center;">2007</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Adelie</td>
-<td style="text-align: center;">Torgersen</td>
-<td style="text-align: right;">42.9</td>
-<td style="text-align: right;">17.6</td>
-<td style="text-align: right;">196</td>
-<td style="text-align: right;">4700</td>
+<td style="text-align: center;">Chinstrap</td>
+<td style="text-align: center;">Dream</td>
+<td style="text-align: right;">52.7</td>
+<td style="text-align: right;">19.8</td>
+<td style="text-align: right;">197</td>
+<td style="text-align: right;">3725</td>
 <td style="text-align: center;">male</td>
-<td style="text-align: center;">2008</td>
+<td style="text-align: center;">2007</td>
 </tr>
 </tbody>
 </table>
@@ -677,19 +677,15 @@
 <div id="tabset-1-1">
 <div class="cell">
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-ddd6162aa895f143a012" style="width:960px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-ddd6162aa895f143a012">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addMarkers","args":[-65.4333,-65.5,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Biscoe Island",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[-64.7333,-64.2333,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Dream Island",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[-64.7666636,-64.083333,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Torgersen Island",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]}],"limits":{"lat":[-65.4333,-64.7333],"lng":[-65.5,-64.083333]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-335aace5d24e3198e368" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-335aace5d24e3198e368">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addMarkers","args":[-65.4333,-65.5,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Biscoe Island",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[-64.7333,-64.2333,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Dream Island",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[-64.7666636,-64.083333,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Torgersen Island",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]}],"limits":{"lat":[-65.4333,-64.7333],"lng":[-65.5,-64.083333]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
 <div id="tabset-1-2">
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure>
 <p><img data-src="presentation_test_files/figure-revealjs/habitat-1.png" width="960"></p>
-</figure>
-</div>
 </div>
 </div>
 </div>
@@ -789,45 +785,25 @@
 <p>Relação entre comprimento da nadadeira e massa corporal</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure>
 <p><img data-src="presentation_test_files/figure-revealjs/body_mass_flipper-1.png" width="960"></p>
-</figure>
-</div>
 </div>
 <div class="cell-output-display">
-<div>
-<figure>
 <p><img data-src="presentation_test_files/figure-revealjs/body_mass_flipper-2.png" width="960"></p>
-</figure>
-</div>
 </div>
 </div>
 <p>Comparação da distribuição da massa corporal por espécie</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure>
 <p><img data-src="presentation_test_files/figure-revealjs/boxplot-1.png" width="960"></p>
-</figure>
-</div>
 </div>
 </div>
 <p>Relação entre comprimento e profundidade do bico</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure>
 <p><img data-src="presentation_test_files/figure-revealjs/bill_lenght_depth-1.png" width="960"></p>
-</figure>
-</div>
 </div>
 <div class="cell-output-display">
-<div>
-<figure>
 <p><img data-src="presentation_test_files/figure-revealjs/bill_lenght_depth-2.png" width="960"></p>
-</figure>
-</div>
 </div>
 </div>
 </div>
@@ -933,11 +909,7 @@
 <p>Histograma de amostras do comprimento da nadadeira (mm)</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure>
 <p><img data-src="presentation_test_files/figure-revealjs/Curva%20Teórica%20Explicação-1.png" width="960"></p>
-</figure>
-</div>
 </div>
 </div>
 <div class="footer">
@@ -961,11 +933,7 @@
 <p>Histograma das médias geradas pelo BootStraping com Curva Teórica</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure>
 <p><img data-src="presentation_test_files/figure-revealjs/Intervalo%20de%20Confiança-1.png" width="960"></p>
-</figure>
-</div>
 </div>
 </div>
 </div>
@@ -973,11 +941,7 @@
 <p>Verifica-se a curva normal teórica com o IC calculado na curva teórica!</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure>
 <p><img data-src="presentation_test_files/figure-revealjs/Intervalo%20com%20Curva%20Teórica-1.png" width="960"></p>
-</figure>
-</div>
 </div>
 </div>
 <p>Logo, um intervalo de confiança com um nível de confiança de 95% indica que, em teoria, se selecionássemos uma amostra de mesmo tamanho de uma mesma população muitas vezes e calculássemos o intervalo de confiança para cada uma delas, aproximadamente 95% desses intervalos incluiriam o verdadeiro valor do parâmetro.</p>
@@ -1023,11 +987,7 @@
 <div id="tabset-4-1">
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure>
 <p><img data-src="presentation_test_files/figure-revealjs/Todas-1.png" width="960"></p>
-</figure>
-</div>
 </div>
 </div>
 <p>Logo, podemos afirmar que há 95% de confiança do intervalo [216.1, 218.2] conter o verdadeiro valor do parâmetro.</p>
@@ -1035,11 +995,7 @@
 <div id="tabset-4-2">
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure>
 <p><img data-src="presentation_test_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
-</figure>
-</div>
 </div>
 </div>
 <p>Logo, podemos afirmar que há 95% de confiança do intervalo [194.6, 196.9] conter o verdadeiro valor do parâmetro.</p>
@@ -1062,84 +1018,84 @@
 <div class="tab-content">
 <div id="tabset-5-1">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="co"># Teste de proporção da QUANTIDADE de pinguins para a espécie Adelie</span></span>
-<span id="cb1-2"><a href=""></a><span class="co"># h0 é igual a 0.33333</span></span>
-<span id="cb1-3"><a href=""></a><span class="co"># h1 é diferente de 0.33333</span></span>
-<span id="cb1-4"><a href=""></a>p0 <span class="ot">=</span> <span class="fl">0.33333</span></span>
-<span id="cb1-5"><a href=""></a>alpha <span class="ot">=</span> <span class="fl">0.05</span></span>
-<span id="cb1-6"><a href=""></a>n_dataset<span class="ot">=</span> <span class="fu">length</span>(penguins_db<span class="sc">$</span>species) <span class="co"># amostra total</span></span>
-<span id="cb1-7"><a href=""></a>n <span class="ot">=</span> <span class="fu">length</span>(species_separadas_adelie<span class="sc">$</span>species) <span class="co"># tamanho da espécie adélie no dt</span></span>
-<span id="cb1-8"><a href=""></a></span>
-<span id="cb1-9"><a href=""></a>p_chapeu_adelie <span class="ot">=</span> n<span class="sc">/</span>n_dataset <span class="co"># proporção adelie/amostra total</span></span>
-<span id="cb1-10"><a href=""></a></span>
-<span id="cb1-11"><a href=""></a>z_adelie_1 <span class="ot">=</span> (p_chapeu_adelie<span class="sc">-</span>p0)<span class="sc">/</span><span class="fu">sqrt</span>(p0<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p0)<span class="sc">/</span>n)</span>
-<span id="cb1-12"><a href=""></a>z_adelie_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Teste de proporção da QUANTIDADE de pinguins para a espécie Adelie</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># h0 é igual a 0.33333</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># h1 é diferente de 0.33333</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>p0 <span class="ot">=</span> <span class="fl">0.33333</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>alpha <span class="ot">=</span> <span class="fl">0.05</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>n_dataset<span class="ot">=</span> <span class="fu">length</span>(penguins_db<span class="sc">$</span>species) <span class="co"># amostra total</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>n <span class="ot">=</span> <span class="fu">length</span>(species_separadas_adelie<span class="sc">$</span>species) <span class="co"># tamanho da espécie adélie no dt</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a>p_chapeu_adelie <span class="ot">=</span> n<span class="sc">/</span>n_dataset <span class="co"># proporção adelie/amostra total</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a>z_adelie_1 <span class="ot">=</span> (p_chapeu_adelie<span class="sc">-</span>p0)<span class="sc">/</span><span class="fu">sqrt</span>(p0<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p0)<span class="sc">/</span>n)</span>
+<span id="cb1-12"><a href="#cb1-12"></a>z_adelie_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.838447</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a>p_valor_adelie <span class="ot">=</span> <span class="fu">pnorm</span>(z_adelie_1)<span class="sc">*</span><span class="dv">2</span></span>
-<span id="cb3-2"><a href=""></a>p_valor_adelie</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>p_valor_adelie <span class="ot">=</span> <span class="fu">pnorm</span>(z_adelie_1)<span class="sc">*</span><span class="dv">2</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>p_valor_adelie</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.995467</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>p_valor_adelie <span class="sc">&lt;</span> alpha</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>p_valor_adelie <span class="sc">&lt;</span> alpha</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="co"># Como o pvalor é maior alpha, aceitamos h0</span></span>
-<span id="cb7-2"><a href=""></a><span class="co"># Portanto, ao nível de 5%,os dados mostram que a proporção da população de pinguins da espécie Adelie é igual a 0.3333(33%).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Como o pvalor é maior alpha, aceitamos h0</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># Portanto, ao nível de 5%,os dados mostram que a proporção da população de pinguins da espécie Adelie é igual a 0.3333(33%).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-5-2">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="co"># Teste para proporção para a QUANTIDADE de pinguins da especie Chinstrap.</span></span>
-<span id="cb8-2"><a href=""></a><span class="co"># h0 é igual a 0.33333</span></span>
-<span id="cb8-3"><a href=""></a><span class="co"># h1 é diferente de 0.33333</span></span>
-<span id="cb8-4"><a href=""></a>n <span class="ot">=</span> <span class="fu">length</span>(species_separadas_chinstrap<span class="sc">$</span>species)</span>
-<span id="cb8-5"><a href=""></a>p_chapeu_chinstrap <span class="ot">=</span> n<span class="sc">/</span>n_dataset</span>
-<span id="cb8-6"><a href=""></a></span>
-<span id="cb8-7"><a href=""></a>z_chinstrap_1 <span class="ot">=</span> (p_chapeu_chinstrap<span class="sc">-</span>p0)<span class="sc">/</span><span class="fu">sqrt</span>(p0<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p0)<span class="sc">/</span>n)</span>
-<span id="cb8-8"><a href=""></a>z_chinstrap_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Teste para proporção para a QUANTIDADE de pinguins da especie Chinstrap.</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co"># h0 é igual a 0.33333</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co"># h1 é diferente de 0.33333</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>n <span class="ot">=</span> <span class="fu">length</span>(species_separadas_chinstrap<span class="sc">$</span>species)</span>
+<span id="cb8-5"><a href="#cb8-5"></a>p_chapeu_chinstrap <span class="ot">=</span> n<span class="sc">/</span>n_dataset</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a>z_chinstrap_1 <span class="ot">=</span> (p_chapeu_chinstrap<span class="sc">-</span>p0)<span class="sc">/</span><span class="fu">sqrt</span>(p0<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p0)<span class="sc">/</span>n)</span>
+<span id="cb8-8"><a href="#cb8-8"></a>z_chinstrap_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -2.373009</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>p_valor_chinstrap <span class="ot">=</span> <span class="fu">pnorm</span>(z_chinstrap_1)<span class="sc">*</span><span class="dv">2</span></span>
-<span id="cb10-2"><a href=""></a>p_valor_chinstrap</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>p_valor_chinstrap <span class="ot">=</span> <span class="fu">pnorm</span>(z_chinstrap_1)<span class="sc">*</span><span class="dv">2</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>p_valor_chinstrap</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.01764381</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a>p_valor_chinstrap <span class="sc">&lt;</span> alpha</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>p_valor_chinstrap <span class="sc">&lt;</span> alpha</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="co"># Como alpha é maior que o pvalor, rejeitamos h0</span></span>
-<span id="cb14-2"><a href=""></a><span class="co"># Ao nível de 5%,os dados mostram que a proporção populacional de pinguins da espécie Chinstrap diferente de 0.3333(33%).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Como alpha é maior que o pvalor, rejeitamos h0</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="co"># Ao nível de 5%,os dados mostram que a proporção populacional de pinguins da espécie Chinstrap diferente de 0.3333(33%).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-5-3">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="co"># Teste para proporção da QUANTIDADE de pinguins para a especie Gentoo</span></span>
-<span id="cb15-2"><a href=""></a><span class="co"># h0 é igual 0.3333</span></span>
-<span id="cb15-3"><a href=""></a><span class="co"># h1 é diferente de 0.3333</span></span>
-<span id="cb15-4"><a href=""></a>n <span class="ot">=</span> <span class="fu">length</span>(species_separadas_gentoo<span class="sc">$</span>species)</span>
-<span id="cb15-5"><a href=""></a>p_chapeu_gentoo <span class="ot">=</span> n<span class="sc">/</span>n_dataset</span>
-<span id="cb15-6"><a href=""></a></span>
-<span id="cb15-7"><a href=""></a>z_gentto_1 <span class="ot">=</span> (p_chapeu_gentoo<span class="sc">-</span>p0)<span class="sc">/</span><span class="fu">sqrt</span>(p0<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p0)<span class="sc">/</span>n)</span>
-<span id="cb15-8"><a href=""></a>z_gentto_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Teste para proporção da QUANTIDADE de pinguins para a especie Gentoo</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co"># h0 é igual 0.3333</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="co"># h1 é diferente de 0.3333</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>n <span class="ot">=</span> <span class="fu">length</span>(species_separadas_gentoo<span class="sc">$</span>species)</span>
+<span id="cb15-5"><a href="#cb15-5"></a>p_chapeu_gentoo <span class="ot">=</span> n<span class="sc">/</span>n_dataset</span>
+<span id="cb15-6"><a href="#cb15-6"></a></span>
+<span id="cb15-7"><a href="#cb15-7"></a>z_gentto_1 <span class="ot">=</span> (p_chapeu_gentoo<span class="sc">-</span>p0)<span class="sc">/</span><span class="fu">sqrt</span>(p0<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p0)<span class="sc">/</span>n)</span>
+<span id="cb15-8"><a href="#cb15-8"></a>z_gentto_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.640988</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>p_valor_gentoo <span class="ot">=</span> <span class="fu">pnorm</span>(z_gentto_1)<span class="sc">*</span><span class="dv">2</span></span>
-<span id="cb17-2"><a href=""></a>p_valor_gentoo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>p_valor_gentoo <span class="ot">=</span> <span class="fu">pnorm</span>(z_gentto_1)<span class="sc">*</span><span class="dv">2</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>p_valor_gentoo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.478469</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a>p_valor_gentoo <span class="sc">&lt;</span> alpha</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>p_valor_gentoo <span class="sc">&lt;</span> alpha</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="co"># Como pvalor é maior que alpha, aceitamos h0</span></span>
-<span id="cb21-2"><a href=""></a><span class="co"># Portanto, ao nível de 5%,os dados mostram que a proporção da populacional de pinguins da espécie Gentoo é igual a 0.3333(33%).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Como pvalor é maior que alpha, aceitamos h0</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="co"># Portanto, ao nível de 5%,os dados mostram que a proporção da populacional de pinguins da espécie Gentoo é igual a 0.3333(33%).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1149,14 +1105,12 @@
 <h2>Muito Obrigado pela Atenção!</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="bg_img/madagascar_bye.png" class="quarto-figure quarto-figure-center" width="900"></p>
+<p><img data-src="bg_img/madagascar_bye.png" width="900"></p>
 </figure>
 </div>
-<div class="quarto-auto-generated-content">
 <p><img src="bg_img/tux.png" class="slide-logo"></p>
 <div class="footer footer-default">
 <p>Davi Augusto, Diogo Bolzan, João Arend, Luan Frederico</p>
-</div>
 </div>
 </section></section>
     </div>
@@ -1185,6 +1139,7 @@
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
+'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1483,9 +1438,10 @@
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      function tippyHover(el, contentFn) {
         const config = {
           allowHTML: true,
+          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1495,17 +1451,8 @@
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start',
+          placement: 'bottom-start'
         };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
