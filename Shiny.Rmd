@@ -1,0 +1,315 @@
+---
+title: "Aplicações do Shiny - Penguins"
+subtitle: ""
+excerpt: ""
+date: 2024-02-27
+author: "Diogo Vieri"
+draft: false
+images:
+series:
+tags:
+categories:
+  - Álgebra Linear
+  - R
+  - Latec
+layout: single
+output: html_document
+runtime: shiny
+---
+
+Nesse post quero complementar o trabalho com algumas aplicações em Shiny!
+
+## Banco de Dados
+
+Com que se parece o banco de dados? Abaixo podemos selecionar quantas observações queremos ver!
+
+```{r Data Base, echo=FALSE, warning=FALSE, message=FALSE}
+library(shiny)
+library(palmerpenguins)
+library(ggpubr)
+library(ggpmisc)
+penguins <- palmerpenguins::penguins
+
+numericInput("rows", "Quantas Observações deseja ver?", 5)
+
+renderTable({
+  head(penguins, input$rows)
+})
+```
+
+## Análises Exploratórias
+
+Com o Shiny é possível visualizar diversos gráficos apenas alterando as opções de um botão!
+E que tal visualizar todas as variáveis (Qualitativa e Quantitativa) do banco de dados?
+
+```{r Distribuições, echo=FALSE, warning=FALSE, message=FALSE}
+
+selectInput("select", label = h4("Selecione a Variável de Interesse:"), 
+    choices = list("Comprimento da Nadadeira" = 1, "Comprimento do Bico" = 2, "Altura do Bico" = 3, "Massa corporal" = 4, "Sexo" = 5, "Ilha" = 6, "Espécies" = 7, "Ano" = 8), 
+    selected = 1)
+
+
+
+renderPlot({
+  if (input$select == 1) {
+    ggplot(penguins, aes(x = flipper_length_mm)) +
+  geom_histogram(fill = "#3E8F92", color = "black") +
+      labs(title = "Distribuição da variável Comprimento da Nadadeira",
+           x = "Comprimento da Nadadeira (mm)",
+           y = "Frequência") +
+      theme(plot.title = element_text(family = "Bangers", hjust = .5, size = 25),
+          axis.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.text = element_text(family = "Playfair", size = 12),
+          panel.grid = element_blank(),
+          panel.background = element_rect(fill = "white"))} 
+  else if (input$select == 2) {
+    ggplot(penguins, aes(x = bill_length_mm)) +
+  geom_histogram(fill = "#B22222", color = "black") +
+      labs(title = "Distribuição da variável Comprimento do Bico",
+           x = "Comprimento do Bico (mm)",
+           y = "Frequência") +
+      theme(plot.title = element_text(family = "Bangers", hjust = .5, size = 25),
+          axis.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.text = element_text(family = "Playfair", size = 12),
+          panel.grid = element_blank(),
+          panel.background = element_rect(fill = "white"))}
+  else if (input$select == 3) {
+    ggplot(penguins, aes(x = bill_depth_mm)) +
+  geom_histogram(fill = "#B03060", color = "black") +
+      labs(title = "Distribuição da variável Altura do Bico",
+           x = "Altura do Bico (mm)",
+           y = "Frequência") +
+      theme(plot.title = element_text(family = "Bangers", hjust = .5, size = 25),
+          axis.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.text = element_text(family = "Playfair", size = 12),
+          panel.grid = element_blank(),
+          panel.background = element_rect(fill = "white"))}
+  else if (input$select == 4) {
+    ggplot(penguins, aes(x = body_mass_g)) +
+  geom_histogram(fill = "#A52A2A", color = "black") +
+      labs(title = "Distribuição da variável Massa Corporal",
+           x = "Massa corporal (g)",
+           y = "Frequência")  +
+      theme(plot.title = element_text(family = "Bangers", hjust = .5, size = 25),
+          axis.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.text = element_text(family = "Playfair", size = 12),
+          panel.grid = element_blank(),
+          panel.background = element_rect(fill = "white"))}
+  else if (input$select == 5) {
+    ggplot(penguins, aes(x = sex)) +
+      geom_bar(fill = c("darkslategray3", "darkslategray4", "darkslategray"), colour = "black") +
+      geom_text(stat='count', aes(label=..count..), vjust=-0.2) +
+      labs(title = "Quantidade de Penguins por Sexo",
+           x = "Sexo dos penguins",
+           y = "Frequência")  +
+      theme(plot.title = element_text(family = "Bangers", hjust = .5, size = 25),
+          axis.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.text = element_text(family = "Playfair", size = 12),
+          panel.grid = element_blank(),
+          panel.background = element_rect(fill = "white")) }
+  else if (input$select == 6) {
+    ggplot(penguins, aes(x = island)) +
+      geom_bar(fill = c("#90EE90", "#7CCD7C", "palegreen4"), colour = "black") +
+      geom_text(stat='count', aes(label=..count..), vjust=-0.2) +
+      labs(title = "Quantidade de Penguins por Ilha",
+           x = "Ilha dos penguins",
+           y = "Frequência") +
+      theme(plot.title = element_text(family = "Bangers", hjust = .5, size = 25),
+          axis.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.text = element_text(family = "Playfair", size = 12),
+          panel.grid = element_blank(),
+          panel.background = element_rect(fill = "white"))}
+    else if (input$select == 7) {
+    ggplot(penguins, aes(x = reorder(species, species, function(x)-length(x)))) +
+      geom_bar(fill = c("#FF82AB", "#EE799F", "palevioletred3"), colour = "black") +
+      geom_text(stat='count', aes(label=..count..), vjust=-0.2) +
+      labs(title = "Quantidade de Penguins por Espécie",
+           x = "Espécie dos penguins",
+           y = "Frequência") +
+      theme(plot.title = element_text(family = "Bangers", hjust = .5, size = 25),
+          axis.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.text = element_text(family = "Playfair", size = 12),
+          panel.grid = element_blank(),
+          panel.background = element_rect(fill = "white")) }
+  else if (input$select == 8) {
+    ggplot(penguins, aes(x = year)) +
+  geom_bar(fill = c("steelblue2", "steelblue3", "steelblue4"), colour = "black") +
+        geom_text(stat='count', aes(label=..count..), vjust=-0.2) +
+      labs(title = "Quantidade de Penguins observados por Ano",
+           x = "Ano de observação dos penguins",
+           y = "Frequência") +
+      theme(plot.title = element_text(family = "Bangers", hjust = .5, size = 25),
+          axis.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.text = element_text(family = "Playfair", size = 12),
+          panel.grid = element_blank(),
+          panel.background = element_rect(fill = "white"))}
+})
+
+```
+
+
+Abaixo há possibilidade de alterar o número de observações que o gráfico irá considerar.
+
+```{r Scarler PLOT, echo=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(showtext)
+font_add_google("Playfair Display", "Playfair")
+font_add_google("Bangers", "Bangers")
+showtext.auto()
+
+sliderInput("valorAd", "Número de Observações para Adelie:", 5, min = 0, max = 146)
+sliderInput("valorCt", "Número de Observações para Chinstrap:", 10, min = 0, max = 68)
+sliderInput("valorGt", "Número de Observações para Gentoo:", 15, min = 0, max = 119)
+
+gento <- penguins |> 
+  na.omit() |> 
+  filter(species == "Gentoo")
+
+adelie <- penguins |> 
+  na.omit() |> 
+  filter(species == "Adelie")
+
+chinstrap <- penguins |> 
+  na.omit() |> 
+  filter(species == "Chinstrap")
+
+renderPlot({
+  set.seed(123)
+  samp1 <- sample_n(gento, size = input$valorGt)
+  samp2 <- sample_n(adelie, size = input$valorAd)
+  samp3 <- sample_n(chinstrap, size = input$valorCt)
+  penguins_sample <- bind_rows(samp1, samp2, samp3)
+  ggplot(penguins_sample, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+    geom_point() +
+    scale_color_manual(name = "Espécies", values = c("Adelie" = "#FC9E21", "Chinstrap" = "#B03060", "Gentoo" = "#3E8F92")) +
+    labs(title = "Relação Massa Corporal com Comprimento da nadadeira",
+        x = "Comprimento da nadadeira (mm)",
+        y = "Massa corporal (g)") +
+    theme(plot.title = element_text(family = "Bangers", hjust = .5, size = 25),
+          axis.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.text = element_text(family = "Playfair", size = 12))
+        
+        
+})
+```
+
+Parece que podemos ver que quanto maior é o comprimento da nadadeira maior é a massa corporal, então vamos tentar escolher um modelo de regressão para ver qual se encaixa melhor:
+
+```{r Modelos ScarlerPlot, echo=FALSE, warning=FALSE, message=FALSE}
+radioButtons("escolhas", label = h3("Escolha algum modelo:"),
+    choices = list("Linear" = 1, "Polinomial (grau 2)" = 2, "Polinomial (grau 3)" = 3, "Polinomial (grau 4)" = 4), 
+    selected = 1)
+
+renderPlot({
+  if (input$escolhas == 1) {
+  ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+    geom_point(mapping = aes(color = species)) +
+    geom_smooth(method = "lm", formula = y ~ poly(x, 1), se = FALSE) +
+    scale_color_manual(name = "Espécies", values = c("Adelie" = "#FC9E21", "Chinstrap" = "#B03060", "Gentoo" = "#3E8F92")) +
+    stat_regline_equation(formula = y ~ poly(x, 1, raw = TRUE)) +
+    stat_poly_eq(formula = y ~ poly(x, 1), rr.digits = 4, label.y = 0.87) +
+    labs(title = "Relação Massa Corporal com Comprimento da nadadeira",
+        x = "Comprimento da nadadeira (mm)",
+        y = "Massa corporal (g)") +
+    theme(plot.title = element_text(family = "Bangers", hjust = .5, size = 25),
+          axis.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.text = element_text(family = "Playfair", size = 12)) }
+  else if (input$escolhas == 2) {
+  ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+    geom_point(mapping = aes(color = species)) +
+    geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = FALSE) +
+    stat_regline_equation(formula = y ~ poly(x, 2, raw = TRUE)) +
+    stat_poly_eq(formula = y ~ poly(x, 2), rr.digits = 4, label.y = 0.87) +
+    scale_color_manual(name = "Espécies", values = c("Adelie" = "#FC9E21", "Chinstrap" = "#B03060", "Gentoo" = "#3E8F92")) +
+    labs(title = "Relação Massa Corporal com Comprimento da nadadeira",
+        x = "Comprimento da nadadeira (mm)",
+        y = "Massa corporal (g)") +
+    theme(plot.title = element_text(family = "Bangers", hjust = .5, size = 25),
+          axis.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.text = element_text(family = "Playfair", size = 12)) }
+  else if (input$escolhas == 3) {
+  ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+    geom_point(mapping = aes(color = species)) +
+    geom_smooth(method = "lm", formula = y ~ poly(x, 3), se = FALSE) +
+    stat_regline_equation(formula = y ~ poly(x, 3, raw = TRUE)) +
+    stat_poly_eq(formula = y ~ poly(x, 3), rr.digits = 4, label.y = 0.87) +
+    scale_color_manual(name = "Espécies", values = c("Adelie" = "#FC9E21", "Chinstrap" = "#B03060", "Gentoo" = "#3E8F92")) +
+    labs(title = "Relação Massa Corporal com Comprimento da nadadeira",
+        x = "Comprimento da nadadeira (mm)",
+        y = "Massa corporal (g)") +
+    theme(plot.title = element_text(family = "Bangers", hjust = .5, size = 25),
+          axis.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.text = element_text(family = "Playfair", size = 12)) }
+  else if (input$escolhas == 4) {
+  ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+    geom_point(mapping = aes(color = species)) +
+    geom_smooth(method = "lm", formula = y ~ poly(x, 4), se = FALSE) +
+    stat_regline_equation(formula = y ~ poly(x, 4, raw = TRUE)) +
+    stat_poly_eq(formula = y ~ poly(x, 4), rr.digits = 4, label.y = 0.87) +
+    scale_color_manual(name = "Espécies", values = c("Adelie" = "#FC9E21", "Chinstrap" = "#B03060", "Gentoo" = "#3E8F92")) +
+    labs(title = "Relação Massa Corporal com Comprimento da nadadeira",
+        x = "Comprimento da nadadeira (mm)",
+        y = "Massa corporal (g)") +
+    theme(plot.title = element_text(family = "Bangers", hjust = .5, size = 25),
+          axis.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.title = element_text(family = "Playfair", hjust = .5, size = 15),
+          legend.text = element_text(family = "Playfair", size = 12)) }
+})
+```
+
+Em nosso [trabalho](https://diogovieri.rbind.io/project/inferencia_trab/) em determinado momento, usamos um método chamado Bootstrapping para calcular o Intervalo de Confiança. O Bootstrapping é um método de reamostragem. A partir de uma amostra, são criadas as demais (todas aleatórias). Abaixo, podemos alterar a quantidade de amostras que serão criadas e ver o quanto se aproxima de uma curva normal teórica. A ideia é que, se a quantidade de reamostras tender ao infinito, as barras se aproximarão perfeitamente da curva.
+
+```{r Bootstrapping, echo=FALSE, warning=FALSE, message=FALSE}
+sliderInput("valorN", "Quantidade de amostras:", 108, min = 0, max = 5000)
+
+renderPlot({
+  set.seed(1234)
+  n <- length(adelie$species) 
+  repeticoes_media <- input$valorN
+  for (i in 1:input$valorN) {
+    amostra <- sample(adelie$flipper_length_mm,
+                    size = n,
+                    replace = TRUE)
+    repeticoes_media[i] <- mean(amostra, na.rm = TRUE)
+}
+
+data <- data.frame(x = repeticoes_media)
+
+ggplot(data = data, aes(x = x)) +
+  geom_histogram(aes(y = after_stat(density)),
+  fill = "#FC9E21",
+  binwidth = 0.1,
+  color = "black") +
+  scale_x_continuous(limits = c(188,192)) +
+  stat_function(fun = dnorm,
+                args = list(mean = mean(data$x, na.rm = TRUE), 
+                            sd = sd(data$x, na.rm = TRUE)),
+                color = "#100818",
+                size = 1) +
+  theme_bw() +
+  labs(title = "Espécie Adelie considerando o comprimento da nadadeira",
+       x = "Comprimento da Nadadeira (mm)",
+       y = "Densidade",
+       fill = "Distribuição") +
+  theme(plot.title = element_text(family = "Bangers", hjust = .5, size = 25),
+        axis.title = element_text(family = "Playfair", hjust = .5, size = 15),
+        plot.background = element_rect(fill = "#fcfbf9"),
+        legend.background = element_rect(fill = "#fcfbf9"),
+        panel.background = element_rect(fill = "#fcfbf9"),
+        legend.key = element_rect(fill = "#fcfbf9"),
+        panel.border = element_rect(fill = "NA", color = "#fcfbf9"),
+        plot.margin = margin(0,0,0,0))
+})
+```
